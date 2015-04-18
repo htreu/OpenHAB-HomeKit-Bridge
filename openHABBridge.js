@@ -1,27 +1,28 @@
 var stdio = require('stdio');
 
 // check command line options
-var ops = stdio.getopt({
-    'check': {key: 'c', args: 2, description: 'What this option means'},
-    'map': {key: 'm', description: 'Another description'},
-    'kaka': {args: 1, mandatory: true},
-    'ooo': {key: 'o'}
-});
+//var ops = stdio.getopt({
+//    'check': {key: 'c', args: 2, description: 'What this option means'},
+//    'map': {key: 'm', description: 'Another description'},
+//    'kaka': {args: 1, mandatory: true},
+//    'ooo': {key: 'o'}
+//});
 
-var request = require('request');
-var crypto = require('crypto');
+var request    = require('request');
+var crypto     = require('crypto');
 var atmosphere = require('atmosphere-client');
-var switchItem = require(".switchItem.js").switchItem;
-var types = require("./accessories/types.js")
+var storage    = require('node-persist');
+var HAPNodeJS  = require("HAP-NodeJS");
+var switchItem = require("./switchItem.js").switchItem;
 
-var storage = require('node-persist');
-var accessory_Factor = new require("./Accessory.js");
-var accessoryController_Factor = new require("./AccessoryController.js");
-var service_Factor = new require("./Service.js");
-var characteristic_Factor = new require("./Characteristic.js");
-var bridge_Factor = new require("./BridgedAccessoryController.js");
+var types                      = HAPNodeJS.types;
+var accessory_Factor           = HAPNodeJS.accessoryFactory;
+var accessoryController_Factor = HAPNodeJS.accessoryControllerFactory;
+var service_Factor             = HAPNodeJS.serviceFactory;
+var characteristic_Factor      = HAPNodeJS.characteristicFactory;
+var bridge_Factor              = HAPNodeJS.bridgeFactory;
 
-console.log("HAP-NodeJS OpenHAB Bridge starting...");
+console.log("OpenHAB Bridge starting...");
 storage.initSync();
 
 var bridgeController = new bridge_Factor.BridgedAccessoryController();
