@@ -8,7 +8,7 @@ Install OpenHAB HAP Bridge:
   npm install
   ```
 
-Run OpenHAB HAP Bridge and connect to OpenHAB on 192.168.0.99 on port 8080:
+Run OpenHAB HAP Bridge and connect to OpenHAB at 192.168.0.99 on port 8080:
   ```js
   npm start -- --server 192.1.0.99:8080
   ```
