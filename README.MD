@@ -3,16 +3,24 @@ OpenHAB HAP Bridge
 OpenHAB HAP Bridge is a bridge implementation of HomeKit Accessory Server.
 The implementation is based on a fork of the original [HAP-NodeJS](https://github.com/KhaosT/HAP-NodeJS) extended with npm package.json and a index.js for the object factories.
 
-Install OpenHAB HAP Bridge:
+##### Install OpenHAB HAP Bridge:
   ```js
   npm install
   ```
 
-Run OpenHAB HAP Bridge and connect to OpenHAB at 192.168.0.99 on port 8080:
+##### Run OpenHAB HAP Bridge and connect to OpenHAB at 192.168.0.99 on port 8080:
   ```js
   npm start -- --server 192.1.0.99:8080
   ```
 
+##### Command line options:
+
+<dl>
+<dt>-s, --server</dt>
+  <dd>The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080</dd>
+<dt>-p, --pincode</dt>
+  <dd>The pincode used for the bridge accessory. Defaults to 031-45-154.</dd>
+</dl>
 
 At this point OpenHAB HAP Bridge will bridge OpenHAB Switch items using the LightBulb Service so only On/Off is supported right now.
 

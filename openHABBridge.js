@@ -2,7 +2,8 @@ var stdio = require('stdio');
 
 // check command line options
 var ops = stdio.getopt({
-    'server': {key: 's', args: 1, description: 'The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080.'}
+    'server': {key: 's', args: 1, description: 'The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080.'},
+    'pincode': {key: 'p', args: 1, description: 'The pincode used for the bridge accessory. Defaults to 031-45-154.'}
 });
 
 var request    = require('request');
@@ -25,7 +26,7 @@ storage.initSync();
 var bridgeController = new bridge_Factor.BridgedAccessoryController();
 var targetPort = 52826;
 var bridgeName = "OpenHAB HomeKit Bridge";
-var pincode = "031-45-154";
+var pincode = ops['pincode'] ? ops['pincode'] : "031-45-154";
 var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080"
 
 registerOpenHABAccessories();
