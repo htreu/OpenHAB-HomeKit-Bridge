@@ -1,12 +1,9 @@
 var stdio = require('stdio');
 
 // check command line options
-//var ops = stdio.getopt({
-//    'check': {key: 'c', args: 2, description: 'What this option means'},
-//    'map': {key: 'm', description: 'Another description'},
-//    'kaka': {args: 1, mandatory: true},
-//    'ooo': {key: 'o'}
-//});
+var ops = stdio.getopt({
+    'server': {key: 's', args: 1, description: 'The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080.'}
+});
 
 var request    = require('request');
 var crypto     = require('crypto');
@@ -29,12 +26,13 @@ var bridgeController = new bridge_Factor.BridgedAccessoryController();
 var targetPort = 52826;
 var bridgeName = "OpenHAB HomeKit Bridge";
 var pincode = "031-45-154";
+var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080"
 
 registerOpenHABAccessories();
 
 
 function registerOpenHABAccessories() {
-  request('http://192.168.0.99:8080/rest/items?type=json', function (error, response, body) {
+  request('http://' + serverAddress + '/rest/items?type=json', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       publishOpenHABBridgeAccessory(body);
     }
