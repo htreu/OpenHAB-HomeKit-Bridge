@@ -1,5 +1,5 @@
 {
-  "name": "OpenHAB-HAP-Bridge",
+  "name": "OpenHAB-HomeKit-Bridge",
   "version": "0.0.1",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
@@ -7,20 +7,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/htreu/OpenHAB-HAP-Bridge"
+    "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge"
   },
   "bugs": {
-    "url": "https://github.com/htreu/OpenHAB-HAP-Bridge/issues"
+    "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues"
   },
   "dependencies": {
-    "HAP-NodeJS": "git://github.com/htreu/HAP-NodeJS",
+    "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS",
     "atmosphere-client": "^2.2.7",
     "crypto": "0.0.3",
     "node-persist": "0.0.3",
     "request": "^2.55.0",
     "stdio": "^0.2.7"
   },
-  "homepage": "https://github.com/htreu/OpenHAB-HAP-Bridge",
+  "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",
   "license": "ISC"
 }
