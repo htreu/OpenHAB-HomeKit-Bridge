@@ -13,7 +13,7 @@
     "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues"
   },
   "dependencies": {
-    "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS",
+    "HAP-NodeJS": "git://github.com/htreu/HAP-NodeJS",
     "atmosphere-client": "^2.2.7",
     "crypto": "0.0.3",
     "node-persist": "0.0.3",
