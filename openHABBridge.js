@@ -8,7 +8,7 @@ var ops = stdio.getopt({
 
 var request    = require('request');
 var crypto     = require('crypto');
-var atmosphere = require('atmosphere-client');
+var WebSocket  = require('ws')
 var storage    = require('node-persist');
 var HAPNodeJS  = require("HAP-NodeJS");
 var switchItem = require("./switchItem.js").switchItem;
@@ -26,7 +26,7 @@ storage.initSync();
 var bridgeController = new bridge_Factor.BridgedAccessoryController();
 var targetPort = 52826;
 var bridgeName = "OpenHAB HomeKit Bridge";
-var pincode = ops['pincode'] ? ops['pincode'] : "031-45-154";
+var pincode = ops['pincode'] ? ops['pincode'] :"031-45-154";
 var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080"
 
 registerOpenHABAccessories();
@@ -160,14 +160,12 @@ function publishAccessory(template, openHABSwitchItem) {
 }
 
 function updateCharacteristicsValue(url, characteristic) {
-  var request = new atmosphere.AtmosphereRequest();
-  request.url = url + '/state?type=json';
-  request.transport = 'long-polling';
-
-  request.onMessage = function(response) {
-    console.log('message: ' + response.responseBody);
-    characteristic.updateValue(response.responseBody === 'ON' ? true : false);
-  };
-
-  atmosphere.subscribe(request);
+  var ws = new WebSocket(url.replace('http:', 'ws:') + '/state?type=json');
+  ws.on('open', function() {
+    console.log('open ws connection for switch characteristic.');
+  });
+  ws.on('message', function(message) {
+    console.log('message: ' + message);
+    characteristic.updateValue(message === 'ON' ? true : false);
+  });
 };

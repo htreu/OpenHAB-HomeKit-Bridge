@@ -5,7 +5,7 @@ The implementation is based on a fork of the original [HAP-NodeJS](https://githu
 
 ##### Prerequisites
 * Running OpenHAB with at least one Switch item connected
-* node.js 0.10.3x
+* node.js 0.12.x
 * iOS Developer account to run a HomeKit application at least in the iOS simulator
 * this repository
 
