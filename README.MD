@@ -4,7 +4,7 @@ OpenHAB HomeKit Bridge is a bridge implementation of the HomeKit Accessory Proto
 The implementation is based on a fork of the original [HAP-NodeJS](https://github.com/KhaosT/HAP-NodeJS) extended with npm package.json and a index.js for the object factories.
 
 ##### Prerequisites
-* Running OpenHAB with at least one Switch item connected
+* [OpenHAB](http://www.openhab.org) server running with at least one Switch item configured
 * node.js 0.12.x
 * iOS Developer account to run a HomeKit application at least in the iOS simulator
 * this repository
