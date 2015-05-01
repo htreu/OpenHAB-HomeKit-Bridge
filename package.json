@@ -22,5 +22,10 @@
   },
   "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "nock": "^1.7.1",
+    "should": "^6.0.1"
+  }
 }
