@@ -2,8 +2,9 @@ var stdio = require('stdio');
 
 // check command line options
 var ops = stdio.getopt({
-    'server': {key: 's', args: 1, description: 'The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080.'},
-    'pincode': {key: 'p', args: 1, description: 'The pincode used for the bridge accessory. Defaults to 031-45-154.'}
+    'server' : {key: 's', args: 1, description: 'The network address and port of the OpenHAB server. Defaults to 127.0.0.1:8080.'},
+    'pincode': {key: 'p', args: 1, description: 'The pincode used for the bridge accessory. Defaults to 031-45-154.'},
+    'sitemap': {key: 'm', args: 1, description: 'The name of the sitemap to load all items from. Defaults to "homekit".'}
 });
 
 var request    = require('request');
@@ -27,30 +28,25 @@ var bridgeController = new bridge_Factor.BridgedAccessoryController();
 var targetPort = 52826;
 var bridgeName = "OpenHAB HomeKit Bridge";
 var pincode = ops['pincode'] ? ops['pincode'] :"031-45-154";
-var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080"
+var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080";
+var sitemapName = ops['sitemap'] ? ops['sitemap'] : "homekit";
 
 registerOpenHABAccessories();
 
 
 function registerOpenHABAccessories() {
-  request('http://' + serverAddress + '/rest/items?type=json', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      publishOpenHABBridgeAccessory(body);
-    }
-  });
+  require('./RestClient.js').fetchSitemap(serverAddress, sitemapName, function (sitemap) {
+    var items = require('./ItemProvider.js').parseSitemap(sitemap, 'Switch');
+    publishOpenHABBridgeAccessory(items);
+  })
 }
 
 // iterate all items and create HAP compatible objects
-function publishOpenHABBridgeAccessory(JSONChunk) {
-  var items = JSON.parse(JSONChunk).item;
-  var openHABswitchItems = items.filter(function filterSwitchItems(value) {
-    return value.type === "SwitchItem";
-  });
-
-  for (var i = 0; i < openHABswitchItems.length; i++) {
-    var openHABSwitchItem = openHABswitchItems[i];
+function publishOpenHABBridgeAccessory(openHABWidgets) {
+  for (var i = 0; i < openHABWidgets.length; i++) {
+    var openHABWidget = openHABWidgets[i];
     var switchItemTemplate = JSON.parse(JSON.stringify(switchItem));
-    var accessoryController = publishAccessory(switchItemTemplate, openHABSwitchItem);
+    var accessoryController = publishAccessory(switchItemTemplate, openHABWidget);
     bridgeController.addAccessory(accessoryController);
   }
 
@@ -96,9 +92,9 @@ function generateUniqueUsername(name) {
     hash[10] + hash[11];
 }
 
-function publishAccessory(template, openHABSwitchItem) {
-  var name = openHABSwitchItem.name;
-  var url = openHABSwitchItem.link;
+function publishAccessory(template, openHABSwitchWidget) {
+  var name = openHABSwitchWidget.name;
+  var url = openHABSwitchWidget.link;
 
   var informationService = getService(template, types.ACCESSORY_INFORMATION_STYPE);
   var nameCharacteristic = getNameCharacteristic(informationService);

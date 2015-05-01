@@ -1,0 +1,55 @@
+{
+  "name": "demo",
+  "label": "Main Menu",
+  "link": "http://localhost:8080/rest/sitemaps/demo",
+  "homepage": {
+    "id": "demo",
+    "title": "Main Menu",
+    "link": "http://localhost:8080/rest/sitemaps/demo/demo",
+    "leaf": "false",
+    "widget": [
+      {
+        "widgetId": "demo_0",
+        "type": "Switch",
+        "label": "Toggle Switch",
+        "icon": "switch-on",
+        "item": {
+          "type": "SwitchItem",
+          "name": "DemoSwitch",
+          "state": "ON",
+          "link": "http://localhost:8080/rest/items/DemoSwitch"
+        }
+      },
+      {
+        "widgetId": "demo_1",
+        "type": "Slider",
+        "label": "Volume",
+        "icon": "slider",
+        "switchSupport": "false",
+        "sendFrequency": "0",
+        "item": {
+          "type": "DimmerItem",
+          "name": "Volume",
+          "state": "Uninitialized",
+          "link": "http://localhost:8080/rest/items/Volume"
+        }
+      },
+      {
+        "widgetId": "demo_2",
+        "type": "Switch",
+        "label": "Button Switch",
+        "icon": "switch-on",
+        "mapping": {
+          "command": "ON",
+          "label": "On"
+        },
+        "item": {
+          "type": "SwitchItem",
+          "name": "DemoSwitch",
+          "state": "ON",
+          "link": "http://localhost:8080/rest/items/DemoSwitch"
+        }
+      }
+    ]
+  }
+}
