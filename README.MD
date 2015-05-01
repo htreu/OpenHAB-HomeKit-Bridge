@@ -26,6 +26,8 @@ The implementation is based on a fork of the original [HAP-NodeJS](https://githu
   <dd>The network address and port of the OpenHAB server as ip:port. Defaults to 127.0.0.1:8080</dd>
 <dt>-p, --pincode</dt>
   <dd>The pincode used for the bridge accessory. Defaults to 031-45-154.</dd>
+<dt>-m, --sitemap</dt>
+  <dd>The name of the sitemap to load all items from. Items must not be nested in frames or groups. Defaults to 'homekit'.</dd>
 </dl>
 
 At this point OpenHAB HomeKit Bridge will bridge [OpenHAB Switch items](https://github.com/openhab/openhab/wiki/Explanation-of-items) using the LightBulb Service so only On/Off is supported right now.
