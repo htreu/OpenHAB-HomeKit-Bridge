@@ -8,7 +8,8 @@ function parseSitemap(sitemap, widgetType) {
         {
           type: widget.type,
           name: widget.label,
-          link: widget.item.link
+          link: widget.item.link,
+          state: widget.item.state
         }
       );
     }

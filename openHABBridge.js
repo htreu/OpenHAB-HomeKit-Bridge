@@ -95,6 +95,7 @@ function generateUniqueUsername(name) {
 function publishAccessory(template, openHABSwitchWidget) {
   var name = openHABSwitchWidget.name;
   var url = openHABSwitchWidget.link;
+  var state = openHABSwitchWidget.state;
 
   var informationService = getService(template, types.ACCESSORY_INFORMATION_STYPE);
   var nameCharacteristic = getNameCharacteristic(informationService);
@@ -105,7 +106,7 @@ function publishAccessory(template, openHABSwitchWidget) {
   nameCharacteristic.initialValue = name;
 
   var powerStateCharacteristic = getPowerStateCharacteristic(lightBulbService);
-
+  powerStateCharacteristic.initialValue = state === 'ON' ? true : false;
   powerStateCharacteristic.onUpdate = function (value) {
     var command = value ? 'ON' : 'OFF';
     request.post(

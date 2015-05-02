@@ -18,12 +18,13 @@ describe('test ItemProvider', function () {
     done();
   });
 
-  it('demo sitemap should return items with properties "type, name, link"', function (done) {
+  it('demo sitemap should return items with all properties set', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
       items[i].should.have.property('type');
       items[i].should.have.property('name');
       items[i].should.have.property('link');
+      items[i].should.have.property('state');
     }
     done();
   })
