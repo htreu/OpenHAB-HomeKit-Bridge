@@ -25,6 +25,23 @@ describe('test ItemProvider', function () {
       items[i].should.have.property('name');
       items[i].should.have.property('link');
       items[i].should.have.property('state');
+
+      if (items[i].name === 'Toggle Switch') {
+        items[i].state.should.equal('ON');
+      }
+    }
+    done();
+  })
+
+  it('demo sitemap should return items with proper initial state', function (done) {
+    var items = itemProvider.parseSitemap(sitemap, '');
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].name === 'Toggle Switch') {
+        items[i].state.should.equal('ON');
+      }
+      if (items[i].name === 'Volume') {
+        items[i].state.should.equal('Uninitialized');
+      }
     }
     done();
   })
