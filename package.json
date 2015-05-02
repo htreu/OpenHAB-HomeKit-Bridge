@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
-    "start": "node openHABBridge.js"
+    "start": "node openHABBridge.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
