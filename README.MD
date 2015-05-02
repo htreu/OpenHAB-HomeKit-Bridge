@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge.svg?branch=master)](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge)
+
 OpenHAB HomeKit Bridge
 =============
 OpenHAB HomeKit Bridge is a bridge implementation of the HomeKit Accessory Protocol.
