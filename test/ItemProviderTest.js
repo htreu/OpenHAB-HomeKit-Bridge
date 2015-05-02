@@ -12,7 +12,7 @@ describe('test ItemProvider', function () {
   // load demo sitemap
   var sitemap = require('./resources/sitemap.json');
 
-  it('demo sitemap should return two items', function (done) {
+  it('demo sitemap should return 3 items', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     items.should.have.length(3);
     done();
