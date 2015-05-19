@@ -1,5 +1,5 @@
 var should = require('should');
-var itemProvider = require('../ItemProvider');
+var itemProvider = require('../lib/ItemProvider');
 
 describe('test ItemProvider', function () {
 

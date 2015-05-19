@@ -1,6 +1,6 @@
 var should = require('should');
 var nock = require('nock')
-var restClient = require('../RestClient.js');
+var restClient = require('../lib/RestClient.js');
 
 describe('test RestClient', function () {
 
