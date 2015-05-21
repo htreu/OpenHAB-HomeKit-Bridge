@@ -20,13 +20,13 @@ var bridge_Factor    = HAPNodeJS.bridgeFactory;
 console.log("OpenHAB Bridge starting...");
 storage.initSync();
 
-var bridgeController = new bridge_Factor.BridgedAccessoryController();
 var targetPort = 52826;
 var bridgeName = "OpenHAB HomeKit Bridge";
 var pincode = ops['pincode'] ? ops['pincode'] :"031-45-154";
 var serverAddress = ops['server'] ? ops['server'] : "127.0.0.1:8080";
 var sitemapName = ops['sitemap'] ? ops['sitemap'] : "homekit";
 
+// start the OpenHAB bridge
 (function startOpenHABBridge() {
   RestClient.fetchSitemap(serverAddress, sitemapName, function (sitemap) {
     var items = ItemProvider.parseSitemap(sitemap, 'Switch');
@@ -36,6 +36,7 @@ var sitemapName = ops['sitemap'] ? ops['sitemap'] : "homekit";
 
 // iterate all items and create HAP compatible objects
 function publishOpenHABBridgeAccessory(openHABWidgets) {
+  var bridgeController = new bridge_Factor.BridgedAccessoryController();
   for (var i = 0; i < openHABWidgets.length; i++) {
     var openHABWidget = openHABWidgets[i];
     var accessoryController = SwitchAccessoryControllerFactory
