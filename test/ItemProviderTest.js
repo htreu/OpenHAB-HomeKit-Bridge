@@ -25,10 +25,6 @@ describe('test ItemProvider', function () {
       items[i].should.have.property('name');
       items[i].should.have.property('link');
       items[i].should.have.property('state');
-
-      if (items[i].name === 'Toggle Switch') {
-        items[i].state.should.equal('ON');
-      }
     }
     done();
   })
@@ -40,7 +36,7 @@ describe('test ItemProvider', function () {
         items[i].state.should.equal('ON');
       }
       if (items[i].name === 'Volume') {
-        items[i].state.should.equal('Uninitialized');
+        items[i].state.should.equal('80');
       }
     }
     done();
@@ -51,6 +47,15 @@ describe('test ItemProvider', function () {
     items.should.have.length(2);
     for (var i = 0; i < items.length; i++) {
       items[i]['type'].should.equal('Switch');
+    }
+    done();
+  })
+
+  it('demo sitemap should return dimmer items when filtered', function (done) {
+    var items = itemProvider.parseSitemap(sitemap, 'Slider');
+    items.should.have.length(1);
+    for (var i = 0; i < items.length; i++) {
+      items[i]['type'].should.equal('Slider');
     }
     done();
   })

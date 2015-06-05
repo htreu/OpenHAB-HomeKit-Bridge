@@ -30,7 +30,7 @@
         "item": {
           "type": "DimmerItem",
           "name": "Volume",
-          "state": "Uninitialized",
+          "state": "80",
           "link": "http://localhost:8080/rest/items/Volume"
         }
       },

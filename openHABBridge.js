@@ -4,6 +4,7 @@ var storage   = require('node-persist');
 var HAPNodeJS = require("HAP-NodeJS");
 
 var SwitchAccessoryControllerFactory = require('./lib/SwitchAccessoryControllerFactory.js');
+var DimmerAccessoryControllerFactory = require('./lib/DimmerAccessoryControllerFactory.js');
 var RestClient = require('./lib/RestClient.js');
 var ItemProvider = require('./lib/ItemProvider.js');
 
@@ -29,7 +30,7 @@ var sitemapName = ops['sitemap'] ? ops['sitemap'] : "homekit";
 // start the OpenHAB bridge
 (function startOpenHABBridge() {
   RestClient.fetchSitemap(serverAddress, sitemapName, function (sitemap) {
-    var items = ItemProvider.parseSitemap(sitemap, 'Switch');
+    var items = ItemProvider.parseSitemap(sitemap);
     publishOpenHABBridgeAccessory(items);
   })
 })();
@@ -38,10 +39,20 @@ var sitemapName = ops['sitemap'] ? ops['sitemap'] : "homekit";
 function publishOpenHABBridgeAccessory(openHABWidgets) {
   var bridgeController = new bridge_Factor.BridgedAccessoryController();
   for (var i = 0; i < openHABWidgets.length; i++) {
+    var accessoryController = undefined;
     var openHABWidget = openHABWidgets[i];
-    var accessoryController = SwitchAccessoryControllerFactory
-      .createSwitchAccessoryController(openHABWidget);
-    bridgeController.addAccessory(accessoryController);
+    if (openHABWidget.type === 'Switch') {
+      accessoryController = SwitchAccessoryControllerFactory
+        .createSwitchAccessoryController(openHABWidget);
+    }
+    if (openHABWidget.type === 'Slider') {
+      accessoryController = DimmerAccessoryControllerFactory
+        .createDimmerAccessoryController(openHABWidget);
+    }
+
+    if (accessoryController) {
+      bridgeController.addAccessory(accessoryController);
+    }
   }
 
   var accessory = new accessory_Factor.Accessory(
