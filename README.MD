@@ -45,6 +45,6 @@ At this point OpenHAB HomeKit Bridge will bridge [OpenHAB Switch items](https://
 To access the bridge from an iDevice use Apples [HomeKit Catalog](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html#//apple_ref/doc/uid/TP40015048) demo application or KhaosT´s [HomeKit Demo](https://github.com/KhaosT/HomeKit-Demo). Use the predefined pin code 031-45-154 to add the bridge as an accessory.
 
 ##### Backlog/ToDo
-* Add more robust websocket listener for state changes in OpenHAB
-* Implement Color item with LightBulb Service
-* Implement Rollershutter
+* Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
+* Implement Color item with LightBulb Service -> see [Issue 6](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/6)
+* Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)
