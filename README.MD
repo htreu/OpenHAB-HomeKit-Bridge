@@ -14,13 +14,19 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 * this repository
 
 ##### Install OpenHAB HomeKit Bridge:
+On non OS X systems install the avahi library:
+  ```js
+  sudo apt-get install libavahi-compat-libdnssd-dev
+  ```
+Install the node module dependencies:
   ```js
   npm install
   ```
 
-##### Run OpenHAB HomeKit Bridge and connect to OpenHAB at 192.168.0.99 on port 8080:
+##### Run OpenHAB HomeKit Bridge
+This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a sitemap named 'demo.sitemap':
   ```js
-  npm start -- --server 192.1.0.99:8080
+  npm start -- --server 192.1.0.99:8080 --sitemap demo
   ```
 
 ##### Command line options:
