@@ -2,9 +2,9 @@ var should = require('should');
 var nock = require('nock')
 var restClient = require('../lib/RestClient.js');
 
-describe('test RestClient', function () {
+describe('RestClient', function () {
 
-  it('RestClient should fetch sitemap', function (done) {
+  it('should fetch sitemap', function (done) {
     nock('http://openhab.test')
       .get('/rest/sitemaps/test.sitemap?type=json')
       .reply(200, '{}');
@@ -15,7 +15,7 @@ describe('test RestClient', function () {
       });
   })
 
-  it('RestClient should return proper object', function (done) {
+  it('should return proper object', function (done) {
     nock('http://openhab.test')
       .get('/rest/sitemaps/test.sitemap?type=json')
       .reply(200, '{ "homepage" : { "widget" : [] } }');
