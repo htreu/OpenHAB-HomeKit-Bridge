@@ -43,6 +43,7 @@ function publishOpenHABBridgeAccessory(openHABWidgets) {
     var accessoryController = undefined;
     var openHABWidget = openHABWidgets[i];
     console.log("processing widget: " + openHABWidget.type);
+    console.log(openHABWidget);
     if (openHABWidget.type === 'Switch') {
       accessoryController = SwitchAccessoryControllerFactory
         .createSwitchAccessoryController(openHABWidget);
