@@ -5,6 +5,7 @@ var HAPNodeJS = require("HAP-NodeJS");
 
 var SwitchAccessoryControllerFactory = require('./lib/SwitchAccessoryControllerFactory.js');
 var DimmerAccessoryControllerFactory = require('./lib/DimmerAccessoryControllerFactory.js');
+var ColorAccessoryControllerFactory = require('./lib/ColorAccessoryControllerFactory.js');
 var RestClient = require('./lib/RestClient.js');
 var ItemProvider = require('./lib/ItemProvider.js');
 
@@ -41,6 +42,7 @@ function publishOpenHABBridgeAccessory(openHABWidgets) {
   for (var i = 0; i < openHABWidgets.length; i++) {
     var accessoryController = undefined;
     var openHABWidget = openHABWidgets[i];
+    console.log("processing widget: " + openHABWidget.type);
     if (openHABWidget.type === 'Switch') {
       accessoryController = SwitchAccessoryControllerFactory
         .createSwitchAccessoryController(openHABWidget);
@@ -48,6 +50,10 @@ function publishOpenHABBridgeAccessory(openHABWidgets) {
     if (openHABWidget.type === 'Slider') {
       accessoryController = DimmerAccessoryControllerFactory
         .createDimmerAccessoryController(openHABWidget);
+    }
+    if (openHABWidget.type === 'Colorpicker') {
+      accessoryController = ColorAccessoryControllerFactory
+        .createColorAccessoryController(openHABWidget);
     }
 
     if (accessoryController) {
