@@ -1,9 +1,9 @@
 var should = require('should');
 var itemProvider = require('../lib/ItemProvider');
 
-describe('test ItemProvider', function () {
+describe('ItemProvider', function () {
 
-  it('empty sitemap should return empty list of items', function (done) {
+  it('should return empty list of items for emtpy sitemap', function (done) {
     var result = itemProvider.parseSitemap({ homepage : { widget: [] }}, '');
     result.should.be.empty;
     done();
@@ -12,13 +12,13 @@ describe('test ItemProvider', function () {
   // load demo sitemap
   var sitemap = require('./resources/sitemap.json');
 
-  it('demo sitemap should return 3 items', function (done) {
+  it('should return 3 items for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     items.should.have.length(3);
     done();
   });
 
-  it('demo sitemap should return items with all properties set', function (done) {
+  it('should return items with all properties set for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
       items[i].should.have.property('type');
@@ -29,7 +29,7 @@ describe('test ItemProvider', function () {
     done();
   })
 
-  it('demo sitemap should return items with proper initial state', function (done) {
+  it('should return items with proper initial state for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
       if (items[i].name === 'Toggle Switch') {
@@ -42,7 +42,7 @@ describe('test ItemProvider', function () {
     done();
   })
 
-  it('demo sitemap should return switch items when filtered', function (done) {
+  it('should return switch items when filtered', function (done) {
     var items = itemProvider.parseSitemap(sitemap, 'Switch');
     items.should.have.length(2);
     for (var i = 0; i < items.length; i++) {
@@ -51,7 +51,7 @@ describe('test ItemProvider', function () {
     done();
   })
 
-  it('demo sitemap should return dimmer items when filtered', function (done) {
+  it('should return dimmer items when filtered', function (done) {
     var items = itemProvider.parseSitemap(sitemap, 'Slider');
     items.should.have.length(1);
     for (var i = 0; i < items.length; i++) {
