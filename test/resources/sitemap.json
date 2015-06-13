@@ -49,6 +49,16 @@
           "state": "ON",
           "link": "http://localhost:8080/rest/items/DemoSwitch"
         }
+      },
+      {
+        "widgetId": "demo_3",
+        "type": "Switch",
+        "label": "Button Switch",
+        "icon": "switch-on",
+        "mapping": {
+          "command": "ON",
+          "label": "On"
+        }
       }
     ]
   }
