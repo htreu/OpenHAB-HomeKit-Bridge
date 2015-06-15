@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
-    "start": "node openHABBridge.js",
+    "start": "node index.js",
     "test": "mocha"
   },
   "repository": {
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS",
+    "babel": "^5.5.8",
     "crypto": "0.0.3",
     "node-persist": "0.0.3",
     "request": "^2.55.0",
