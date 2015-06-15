@@ -1,6 +1,8 @@
-var should = require('should');
-var nock = require('nock')
-var restClient = require('../lib/RestClient.js');
+import should from 'should';
+import nock from 'nock';
+import { RestClient } from '../lib/RestClient.js';
+
+process.env.NODE_ENV = 'test';
 
 describe('RestClient', function () {
 
@@ -9,7 +11,7 @@ describe('RestClient', function () {
       .get('/rest/sitemaps/test.sitemap?type=json')
       .reply(200, '{}');
 
-    restClient.fetchSitemap('openhab.test', 'test.sitemap',
+    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
       function callback(result) {
         done();
       });
@@ -20,7 +22,7 @@ describe('RestClient', function () {
       .get('/rest/sitemaps/test.sitemap?type=json')
       .reply(200, '{ "homepage" : { "widget" : [] } }');
 
-    restClient.fetchSitemap('openhab.test', 'test.sitemap',
+    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
       function callback(result) {
         result.should.have.property('homepage');
         result.homepage.should.have.property('widget');

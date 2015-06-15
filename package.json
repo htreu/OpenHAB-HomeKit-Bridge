@@ -4,7 +4,7 @@
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha"
+    "test": "mocha --compilers js:babel/register"
   },
   "repository": {
     "type": "git",

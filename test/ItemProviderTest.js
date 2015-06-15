@@ -1,7 +1,11 @@
-var should = require('should');
-var itemProvider = require('../lib/ItemProvider');
+import should from 'should';
+import { ItemProvider } from '../lib/ItemProvider';
+
+process.env.NODE_ENV = 'test';
 
 describe('ItemProvider', function () {
+
+  var itemProvider = new ItemProvider();
 
   it('should return empty list of items for emtpy sitemap', function (done) {
     var result = itemProvider.parseSitemap({ homepage : { widget: [] }}, '');
