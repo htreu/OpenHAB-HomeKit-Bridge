@@ -47,19 +47,19 @@ describe('ItemProvider', function () {
   })
 
   it('should return switch items when filtered', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, 'Switch');
+    var items = itemProvider.parseSitemap(sitemap, itemProvider.SWITCH_ITEM);
     items.should.have.length(2);
     for (var i = 0; i < items.length; i++) {
-      items[i]['type'].should.equal('Switch');
+      items[i]['type'].should.equal('SwitchItem');
     }
     done();
   })
 
   it('should return dimmer items when filtered', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, 'Slider');
+    var items = itemProvider.parseSitemap(sitemap, itemProvider.DIMMER_ITEM);
     items.should.have.length(1);
     for (var i = 0; i < items.length; i++) {
-      items[i]['type'].should.equal('Slider');
+      items[i]['type'].should.equal('DimmerItem');
     }
     done();
   })
