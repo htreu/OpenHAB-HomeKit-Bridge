@@ -31,7 +31,7 @@ describe('ItemProvider', function () {
       items[i].should.have.property('state');
     }
     done();
-  })
+  });
 
   it('should return items with proper initial state for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
@@ -44,7 +44,7 @@ describe('ItemProvider', function () {
       }
     }
     done();
-  })
+  });
 
   it('should return switch items when filtered', function (done) {
     var items = itemProvider.parseSitemap(sitemap, itemProvider.SWITCH_ITEM);
@@ -53,7 +53,7 @@ describe('ItemProvider', function () {
       items[i]['type'].should.equal('SwitchItem');
     }
     done();
-  })
+  });
 
   it('should return dimmer items when filtered', function (done) {
     var items = itemProvider.parseSitemap(sitemap, itemProvider.DIMMER_ITEM);
@@ -62,6 +62,6 @@ describe('ItemProvider', function () {
       items[i]['type'].should.equal('DimmerItem');
     }
     done();
-  })
+  });
 
 });
