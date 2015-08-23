@@ -22,4 +22,15 @@ describe('SwitchItem', function () {
     switchItem.services[0].sType.should.equal(types.ACCESSORY_INFORMATION_STYPE);
   });
 
+  it('should contain SwitchService', function () {
+    let switchItem = createSwitchItem();
+    switchItem.services[1].sType.should.equal(types.SWITCH_STYPE);
+  });
+
+  it('should have set the correct name', function () {
+    let switchItem = createSwitchItem();
+    switchItem.services[0].characteristics[0].initialValue.should.equal('switchItemName');
+    switchItem.services[1].characteristics[0].initialValue.should.equal('switchItemName');
+  });
+
 });
