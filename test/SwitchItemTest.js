@@ -1,6 +1,6 @@
 import should from 'should';
 import Types from 'HAP-NodeJS';
-let types = Types.types;
+var types = Types.types;
 import { SwitchItem } from '../lib/SwitchItem.js';
 
 process.env.NODE_ENV = 'test';
