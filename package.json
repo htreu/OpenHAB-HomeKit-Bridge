@@ -14,7 +14,7 @@
     "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues"
   },
   "dependencies": {
-    "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS.git#f20b280",
+    "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS.git#1613b73",
     "babel": "^5.5.8",
     "crypto": "0.0.3",
     "node-persist": "0.0.3",
