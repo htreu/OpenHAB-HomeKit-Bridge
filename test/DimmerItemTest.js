@@ -1,6 +1,6 @@
 import should from 'should';
 import nock from 'nock';
-import {Service, Characteristic} from 'HAP-NodeJS';
+import { Service, Characteristic } from 'HAP-NodeJS';
 
 import { DimmerItem } from '../lib/DimmerItem.js';
 
@@ -41,7 +41,6 @@ describe('DimmerItem', function () {
     nock('http://openhab.test')
       .get('/rest/dimmerItem/state?type=json')
       .reply(200, function(uri, requestBody) {
-        should(true).be.true;
         done();
       });
     createDimmerItem();

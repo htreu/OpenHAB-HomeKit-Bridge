@@ -1,6 +1,6 @@
 import should from 'should';
 import nock from 'nock';
-import {Service, Characteristic} from 'HAP-NodeJS';
+import { Service, Characteristic } from 'HAP-NodeJS';
 
 import { SwitchItem } from '../lib/SwitchItem.js';
 
@@ -38,7 +38,6 @@ describe('SwitchItem', function () {
     nock('http://openhab.test')
       .get('/rest/switchItem/state?type=json')
       .reply(200, function(uri, requestBody) {
-        should(true).be.true;
         done();
       });
     createSwitchItem();
