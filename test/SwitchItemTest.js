@@ -7,7 +7,7 @@ import { SwitchItem } from '../lib/SwitchItem.js';
 process.env.NODE_ENV = 'test';
 
 function createSwitchItem() {
-  return new SwitchItem('switchItemName', 'http://openhab.test/switchItem', '1');
+  return new SwitchItem('switchItemName', 'http://openhab.test/rest/switchItem', 'ON');
 }
 
 describe('SwitchItem', function () {
@@ -26,6 +26,22 @@ describe('SwitchItem', function () {
       .getCharacteristic(Characteristic.Name).value.should.equal('switchItemName');
     accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Name).value.should.equal('switchItemName');
+  });
+
+  it('should have set the initial value', function () {
+    let switchItem = createSwitchItem();
+    switchItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+  });
+
+  it('should make web socket connection to OpenHAB', function (done) {
+    nock('http://openhab.test')
+      .get('/rest/switchItem/state?type=json')
+      .reply(200, function(uri, requestBody) {
+        should(true).be.true;
+        done();
+      });
+    createSwitchItem();
   });
 
 });
