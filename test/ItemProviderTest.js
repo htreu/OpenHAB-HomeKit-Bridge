@@ -16,9 +16,9 @@ describe('ItemProvider', function () {
   // load demo sitemap
   var sitemap = require('./resources/sitemap.json');
 
-  it('should return 3 items for demo sitemap', function (done) {
+  it('should return 6 items for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
-    items.should.have.length(3);
+    items.should.have.length(6);
     done();
   });
 
@@ -36,11 +36,16 @@ describe('ItemProvider', function () {
   it('should return items with proper initial state for demo sitemap', function (done) {
     var items = itemProvider.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
-      if (items[i].name === 'Toggle Switch') {
-        items[i].state.should.equal('ON');
-      }
-      if (items[i].name === 'Volume') {
-        items[i].state.should.equal('80');
+      switch (items[i].name) {
+        case 'Toggle Switch':
+          items[i].state.should.equal('ON');
+          break;
+        case 'Dimmed Light':
+          items[i].state.should.equal('80');
+          break;
+        case 'RGB Light':
+          items[i].state.should.equal('144.32432432432432,41.340782122905026,70.19607843137254');
+          break;
       }
     }
     done();
