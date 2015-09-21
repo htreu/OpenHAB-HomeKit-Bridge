@@ -46,5 +46,4 @@ To access the bridge from an iDevice use Apples [HomeKit Catalog](https://develo
 
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
-* Implement Color item with LightBulb Service -> see [Issue 6](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/6)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)
