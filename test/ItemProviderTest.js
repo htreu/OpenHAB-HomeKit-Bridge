@@ -69,4 +69,11 @@ describe('ItemProvider', function () {
     done();
   });
 
+  it('should return one item for single item sitemap', function (done) {
+    var sitemap = require('./resources/sitemap_single_item.json');
+    var items = itemProvider.parseSitemap(sitemap);
+    items.should.have.length(1);
+    done();
+  });
+
 });
