@@ -50,4 +50,45 @@ describe('ColorItem', function () {
     createColorItem();
   });
 
+  it('should update characteristics value when listener triggers', function (done) {
+    let colorItem = createColorItem();
+
+    colorItem.updatingFromOpenHAB = true;
+    colorItem.listener.callback('90,100,0');
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.false;
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(0);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Hue).value.should.be.equal(90);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Saturation).value.should.be.equal(100);
+    colorItem.updatingFromOpenHAB.should.be.false;
+
+    colorItem.updatingFromOpenHAB = true;
+    colorItem.listener.callback('0,100,50');
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(50);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Hue).value.should.be.equal(0);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Saturation).value.should.be.equal(100);
+    colorItem.updatingFromOpenHAB.should.be.false;
+
+    colorItem.updatingFromOpenHAB = true;
+    colorItem.listener.callback('90,0,100');
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(100);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Hue).value.should.be.equal(90);
+    colorItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Saturation).value.should.be.equal(0);
+    colorItem.updatingFromOpenHAB.should.be.false;
+    done();
+  });
+
 });

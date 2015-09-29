@@ -46,4 +46,33 @@ describe('DimmerItem', function () {
     createDimmerItem();
   });
 
+  it('should update characteristics value when listener triggers', function (done) {
+    let dimmerItem = createDimmerItem();
+
+    dimmerItem.updatingFromOpenHAB = true;
+    dimmerItem.listener.callback('0');
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.false;
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(0);
+    dimmerItem.updatingFromOpenHAB.should.be.false;
+
+    dimmerItem.updatingFromOpenHAB = true;
+    dimmerItem.listener.callback('50');
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(50);
+    dimmerItem.updatingFromOpenHAB.should.be.false;
+
+    dimmerItem.updatingFromOpenHAB = true;
+    dimmerItem.listener.callback('100');
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+    dimmerItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.Brightness).value.should.be.equal(100);
+    dimmerItem.updatingFromOpenHAB.should.be.false;
+    done();
+  });
+
 });

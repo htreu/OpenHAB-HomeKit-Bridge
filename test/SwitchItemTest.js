@@ -43,4 +43,21 @@ describe('SwitchItem', function () {
     createSwitchItem();
   });
 
+  it('should update characteristics value when listener triggers', function (done) {
+    let switchItem = createSwitchItem();
+
+    switchItem.updatingFromOpenHAB = true;
+    switchItem.listener.callback('ON');
+    switchItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.true;
+    switchItem.updatingFromOpenHAB.should.be.false;
+
+    switchItem.updatingFromOpenHAB = true;
+    switchItem.listener.callback('OFF');
+    switchItem.accessory.getService(Service.Lightbulb)
+      .getCharacteristic(Characteristic.On).value.should.be.false;
+    switchItem.updatingFromOpenHAB.should.be.false;
+    done();
+  });
+
 });
