@@ -3,6 +3,9 @@ node_js:
   - "0.12"
   - "4.1.2"
 
+compiler:
+  - gcc
+
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
