@@ -1,6 +1,6 @@
 import should from 'should';
 import nock from 'nock';
-import { Service, Characteristic } from 'HAP-NodeJS';
+import { Service, Characteristic } from 'hap-nodejs';
 
 import { ColorItem } from '../lib/ColorItem.js';
 

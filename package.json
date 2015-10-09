@@ -14,9 +14,9 @@
     "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues"
   },
   "dependencies": {
-    "hap-nodejs": "git://github.com/KhaosT/HAP-NodeJS.git#215a3bb",
-    "babel": "^5.5.8",
+    "babel": "^5.8.23",
     "crypto": "0.0.3",
+    "hap-nodejs": "git://github.com/KhaosT/HAP-NodeJS.git#215a3bb",
     "node-persist": "0.0.3",
     "request": "^2.55.0",
     "stdio": "^0.2.7",
@@ -26,8 +26,8 @@
   "main": "openHABBridge.js",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^2.2.4",
-    "nock": "^1.7.1",
-    "should": "^6.0.1"
+    "mocha": "^2.3.3",
+    "nock": "^2.13.0",
+    "should": "^7.1.0"
   }
 }
