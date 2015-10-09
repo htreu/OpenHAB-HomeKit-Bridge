@@ -12,7 +12,7 @@ function createTemperatureSensor() {
 
 describe('TemperatureSensor', function () {
 
-  it('should contain AccessoryInformation & Lightbulb services', function () {
+  it('should contain AccessoryInformation & TemperatureSensor services', function () {
     let temperatureSensor = createTemperatureSensor();
     temperatureSensor.should.have.property('accessory');
     temperatureSensor.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
