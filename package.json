@@ -1,5 +1,5 @@
 {
-  "name": "OpenHAB-HomeKit-Bridge",
+  "name": "openHAB-HomeKit-Bridge",
   "version": "1.1.0",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues"
   },
   "dependencies": {
-    "HAP-NodeJS": "git://github.com/KhaosT/HAP-NodeJS.git#6bf0f9",
+    "hap-nodejs": "git://github.com/KhaosT/HAP-NodeJS.git#215a3bb",
     "babel": "^5.5.8",
     "crypto": "0.0.3",
     "node-persist": "0.0.3",
