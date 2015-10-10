@@ -1,3 +1,5 @@
+'use strict'
+
 import should from 'should';
 import nock from 'nock';
 import { RestClient } from '../lib/RestClient.js';
@@ -15,7 +17,7 @@ describe('RestClient', function () {
       function callback(result) {
         done();
       });
-  })
+  });
 
   it('should return proper object', function (done) {
     nock('http://openhab.test')
@@ -29,6 +31,6 @@ describe('RestClient', function () {
         result.homepage.widget.should.be.instanceof(Array);
         done();
       });
-  })
+  });
 
 });
