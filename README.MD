@@ -2,34 +2,50 @@
 
 OpenHAB HomeKit Bridge
 =============
-OpenHAB HomeKit Bridge is a bridge implementation of the HomeKit Accessory Protocol.
-The implementation is based on a fork of the original [HAP-NodeJS](https://github.com/KhaosT/HAP-NodeJS) extended with npm package.json and a index.js for the object factories.
+OpenHAB HomeKit Bridge bridges openHAB items to Apple´s HomeKit Accessory Protocol. It is based on [hap-nodejs](https://github.com/KhaosT/HAP-NodeJS).
 
 Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 
 ##### Prerequisites
-* [OpenHAB](http://www.openhab.org) server running with at least one Switch item configured
-* node.js 0.12.x
-* iOS Developer account to run a HomeKit application at least in the iOS simulator
+* [openHAB](http://www.openhab.org) server running with at least one Switch item configured
+* node.js 0.12.x or 4.1.x
+* an iOS device running iOS 8 or 9
+* an iOS app for modifying the HomeKit database (like [elgato eve](https://www.elgato.com/de/eve-app-homekit))
 * this repository
 
-##### Install OpenHAB HomeKit Bridge:
-On non OS X systems install the avahi library:
-  ```js
-  sudo apt-get install libavahi-compat-libdnssd-dev
+##### Install the OpenHAB HomeKit Bridge:
+* On non OS X systems install the avahi library:
+
+  `sudo apt-get install libavahi-compat-libdnssd-dev`
+* Install the node module dependencies:
+
+  `npm install`
+* Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
-Install the node module dependencies:
-  ```js
-  npm install
+  sitemap demo label="HomeKit" {
+    # On/Off Item (lights, outlets)
+    Switch item=DemoSwitch label="Toggle Switch"
+
+    # Dimmer items (On/Off, Brightness)
+    Slider item=DimmedLight label="Dimmed Light" switchSupport
+
+    # RGB light items (On/Off, Brightness, Hue, Saturation)
+    Colorpicker item=RGBLight icon="slider"
+
+    # Rollershutter/Blinds
+    Switch item=Shutter_GF_Living
+
+    # Temperature sensor
+    Text item=Temperature_GF_Living
+}
   ```
 
 ##### Run OpenHAB HomeKit Bridge
 This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a sitemap named 'demo.sitemap':
-  ```js
-  npm start -- --server 192.1.0.99:8080 --sitemap demo
-  ```
 
-##### Command line options:
+  `npm start -- --server 192.1.0.99:8080 --sitemap demo`
+
+###### Command line options:
 
 <dl>
 <dt>-s, --server</dt>
@@ -40,9 +56,7 @@ This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a
   <dd>The name of the sitemap to load all items from. Items must not be nested in frames or groups. Defaults to 'homekit'.</dd>
 </dl>
 
-At this point OpenHAB HomeKit Bridge will bridge [OpenHAB Switch items](https://github.com/openhab/openhab/wiki/Explanation-of-items) using the LightBulb Service so only On/Off is supported right now.
-
-To access the bridge from an iDevice use Apples [HomeKit Catalog](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html#//apple_ref/doc/uid/TP40015048) demo application or KhaosT´s [HomeKit Demo](https://github.com/KhaosT/HomeKit-Demo). Use the predefined pin code 031-45-154 to add the bridge as an accessory.
+To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
 
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
