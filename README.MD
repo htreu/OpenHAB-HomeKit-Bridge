@@ -8,7 +8,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 
 ##### Prerequisites
 * [openHAB](http://www.openhab.org) server running with at least one Switch item configured
-* node.js 0.12.x or 4.1.x
+* node.js 0.12.x, 4.0.x or 4.1.x
 * an iOS device running iOS 8 or 9
 * an iOS app for modifying the HomeKit database (like [elgato eve](https://www.elgato.com/de/eve-app-homekit))
 * this repository
@@ -57,6 +57,12 @@ This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a
 </dl>
 
 To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
+
+##### Running Tests
+
+To execute unit tests run
+
+`npm test`
 
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
