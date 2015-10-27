@@ -58,6 +58,8 @@ This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a
 
 To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
 
+You may use the `start.sh.template` to create your own simple start up script. This gives you at least simple logging output and debugging possibilities in case the bridge runs in the background.
+
 ##### Running Tests
 
 To execute unit tests run
