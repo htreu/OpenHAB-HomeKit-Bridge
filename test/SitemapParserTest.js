@@ -1,14 +1,14 @@
 import should from 'should';
-import { ItemProvider } from '../lib/ItemProvider';
+import { SitemapParser } from '../lib/SitemapParser';
 
 process.env.NODE_ENV = 'test';
 
-describe('ItemProvider', function () {
+describe('SitemapParser', function () {
 
-  var itemProvider = new ItemProvider();
+  var sitemapParser = new SitemapParser();
 
   it('should return empty list of items for emtpy sitemap', function (done) {
-    var result = itemProvider.parseSitemap({ homepage : { widget: [] }}, '');
+    var result = sitemapParser.parseSitemap({ homepage : { widget: [] }}, '');
     result.should.be.empty;
     done();
   });
@@ -17,13 +17,13 @@ describe('ItemProvider', function () {
   var sitemap = require('./resources/sitemap.json');
 
   it('should return 6 items for demo sitemap', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, '');
+    var items = sitemapParser.parseSitemap(sitemap, '');
     items.should.have.length(6);
     done();
   });
 
   it('should return items with all properties set for demo sitemap', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, '');
+    var items = sitemapParser.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
       items[i].should.have.property('type');
       items[i].should.have.property('name');
@@ -34,7 +34,7 @@ describe('ItemProvider', function () {
   });
 
   it('should return items with proper initial state for demo sitemap', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, '');
+    var items = sitemapParser.parseSitemap(sitemap, '');
     for (var i = 0; i < items.length; i++) {
       switch (items[i].name) {
         case 'Toggle Switch':
@@ -52,7 +52,7 @@ describe('ItemProvider', function () {
   });
 
   it('should return switch items when filtered', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, itemProvider.SWITCH_ITEM);
+    var items = sitemapParser.parseSitemap(sitemap, sitemapParser.SWITCH_ITEM);
     items.should.have.length(2);
     for (var i = 0; i < items.length; i++) {
       items[i]['type'].should.equal('SwitchItem');
@@ -61,7 +61,7 @@ describe('ItemProvider', function () {
   });
 
   it('should return dimmer items when filtered', function (done) {
-    var items = itemProvider.parseSitemap(sitemap, itemProvider.DIMMER_ITEM);
+    var items = sitemapParser.parseSitemap(sitemap, sitemapParser.DIMMER_ITEM);
     items.should.have.length(1);
     for (var i = 0; i < items.length; i++) {
       items[i]['type'].should.equal('DimmerItem');
@@ -71,7 +71,7 @@ describe('ItemProvider', function () {
 
   it('should return one item for single item sitemap', function (done) {
     var sitemap = require('./resources/sitemap_single_item.json');
-    var items = itemProvider.parseSitemap(sitemap);
+    var items = sitemapParser.parseSitemap(sitemap);
     items.should.have.length(1);
     done();
   });
