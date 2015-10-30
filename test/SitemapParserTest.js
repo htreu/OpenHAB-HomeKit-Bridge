@@ -1,11 +1,13 @@
 import should from 'should';
 import { SitemapParser } from '../lib/SitemapParser';
+import { ItemType } from '../lib/ItemType';
 
 process.env.NODE_ENV = 'test';
 
 describe('SitemapParser', function () {
 
   var sitemapParser = new SitemapParser();
+  var itemType = new ItemType();
 
   it('should return empty list of items for emtpy sitemap', function (done) {
     var result = sitemapParser.parseSitemap({ homepage : { widget: [] }}, '');
@@ -52,7 +54,7 @@ describe('SitemapParser', function () {
   });
 
   it('should return switch items when filtered', function (done) {
-    var items = sitemapParser.parseSitemap(sitemap, sitemapParser.SWITCH_ITEM);
+    var items = sitemapParser.parseSitemap(sitemap, itemType.SWITCH_ITEM);
     items.should.have.length(2);
     for (var i = 0; i < items.length; i++) {
       items[i]['type'].should.equal('SwitchItem');
@@ -61,7 +63,7 @@ describe('SitemapParser', function () {
   });
 
   it('should return dimmer items when filtered', function (done) {
-    var items = sitemapParser.parseSitemap(sitemap, sitemapParser.DIMMER_ITEM);
+    var items = sitemapParser.parseSitemap(sitemap, itemType.DIMMER_ITEM);
     items.should.have.length(1);
     for (var i = 0; i < items.length; i++) {
       items[i]['type'].should.equal('DimmerItem');
