@@ -4,7 +4,7 @@
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --compilers js:babel/register"
+    "test": "./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,9 @@
   "main": "openHABBridge.js",
   "license": "ISC",
   "devDependencies": {
+    "babel-istanbul": "^0.4.1",
     "mocha": "^2.3.3",
+    "mocha-istanbul": "^0.2.0",
     "nock": "^2.13.0",
     "should": "^7.1.0"
   }
