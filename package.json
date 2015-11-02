@@ -4,9 +4,9 @@
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
     "start": "node index.js",
-    "test": "./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register",
+    "test": "mocha --compilers js:babel/register",
     "coverage": "./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register",
-    "coveralls": "npm run-script coverage && node bin/coveralls.js ./coverage/lcov.info"
+    "coveralls": "npm run-script coverage && ./node_modules/.bin/coveralls ./coverage/lcov.info"
   },
   "repository": {
     "type": "git",
