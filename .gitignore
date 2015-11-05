@@ -1,6 +1,10 @@
 node_modules
 persist
 npm-debug.log
+coverage
+.idea
+.vagrant
+persist
 lcov-report
 lib-cov
 lcov.info

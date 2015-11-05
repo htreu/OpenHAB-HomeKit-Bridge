@@ -69,5 +69,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get install -y curl
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y libavahi-compat-libdnssd-dev build-essential nodejs git
+    cd /vagrant
+    npm install
   SHELL
 end
