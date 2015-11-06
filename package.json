@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js start",
     "test": "mocha --compilers js:babel-core/register --reporter spec",
-    "precoverage": "rm -rf lcov* lib-cov && `npm bin`/babel-istanbul instrument --es-modules --output lib-cov lib",
+    "precoverage": "mv .babelrc babelrc && rm -rf lcov* lib-cov && `npm bin`/babel-istanbul instrument --es-modules --output lib-cov lib && mv babelrc .babelrc",
     "coverage": "export COVER=true && export ISTANBUL_REPORTERS='text-summary, lcov' && mocha --compilers js:babel-core/register --reporter mocha-istanbul",
     "precoveralls": "npm run-script coverage",
     "coveralls": "`npm bin`/coveralls < lcov.info"
