@@ -67,6 +67,10 @@ To execute unit tests run
 
 `npm test`
 
+To produce test coverage output run
+
+`npm run-script coverage`
+
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)
