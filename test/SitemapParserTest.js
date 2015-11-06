@@ -1,8 +1,7 @@
 'use strict';
 
 import should from 'should';
-import { SitemapParser } from '../index';
-import { ItemType } from '../index';
+import { SitemapParser, ItemType } from '../index';
 
 process.env.NODE_ENV = 'test';
 
