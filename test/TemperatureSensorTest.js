@@ -1,8 +1,10 @@
+'use strict';
+
 import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';
 
-import { TemperatureSensor } from '../lib/TemperatureSensor.js';
+import { TemperatureSensor } from '..';
 
 process.env.NODE_ENV = 'test';
 

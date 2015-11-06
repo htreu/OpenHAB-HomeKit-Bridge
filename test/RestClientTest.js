@@ -2,7 +2,7 @@
 
 import should from 'should';
 import nock from 'nock';
-import { RestClient } from '../lib/RestClient.js';
+import { RestClient } from '..';
 
 process.env.NODE_ENV = 'test';
 

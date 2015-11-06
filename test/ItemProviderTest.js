@@ -1,6 +1,7 @@
+'use strict';
+
 import should from 'should';
-import { ItemProvider } from '../lib/ItemProvider';
-import { ItemType } from '../lib/ItemType';
+import { ItemProvider } from '..';
 
 process.env.NODE_ENV = 'test';
 

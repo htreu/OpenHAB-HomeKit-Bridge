@@ -1,8 +1,10 @@
+'use strict';
+
 import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';
 
-import { DimmerItem } from '../lib/DimmerItem.js';
+import { DimmerItem } from '..';
 
 process.env.NODE_ENV = 'test';
 

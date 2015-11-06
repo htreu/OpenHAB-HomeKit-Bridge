@@ -3,10 +3,14 @@
   "version": "1.1.0",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha --compilers js:babel/register",
-    "coverage": "./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register",
-    "coveralls": "npm run-script coverage && ./node_modules/.bin/coveralls < ./coverage/lcov.info"
+    "start": "node index.js start",
+    "test": "mocha --compilers js:babel/register --reporter spec",
+
+    "precoverage": "rm -rf lcov* lib-cov && `npm bin`/babel-istanbul instrument --es-modules --output lib-cov lib",
+    "coverage": "export COVER=true && export ISTANBUL_REPORTERS='text-summary, lcov' && mocha --compilers js:babel/register --reporter mocha-istanbul",
+
+    "precoveralls": "npm run-script coverage",
+    "coveralls": "`npm bin`/coveralls < lcov.info"
   },
   "repository": {
     "type": "git",
