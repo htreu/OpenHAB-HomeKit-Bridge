@@ -36,6 +36,15 @@ describe('TemperatureSensor', function () {
       .getCharacteristic(Characteristic.CurrentTemperature).value.should.equal(23.5);
   });
 
+  it('should update its value from openhab', function () {
+    let temperatureSensor = createTemperatureSensor();
+
+    temperatureSensor.updateCharacteristics('11.9');
+
+    temperatureSensor.accessory.getService(Service.TemperatureSensor)
+      .getCharacteristic(Characteristic.CurrentTemperature).value.should.equal(11.9);
+  });
+
   it('should make web socket connection to OpenHAB', function (done) {
     nock('http://openhab.test')
       .get('/rest/temperatureSensor/state?type=json')
