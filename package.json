@@ -29,7 +29,7 @@
     "request": "^2.55.0",
     "stdio": "^0.2.7",
     "ws": "^0.8.0",
-    "EventSource": "^0.1.6"
+    "eventsource": "^0.1.6"
   },
   "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",
