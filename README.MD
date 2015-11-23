@@ -55,6 +55,8 @@ This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a
   <dd>The pincode used for the bridge accessory. Defaults to 031-45-154.</dd>
 <dt>-m, --sitemap</dt>
   <dd>The name of the sitemap to load all items from. Items must not be nested in frames or groups. Defaults to 'homekit'.</dd>
+  <dt>-m, --sitemap</dt>
+    <dd>Version of OpenHab you are running. Valid values are 1 or 2. Defaults to 1.</dd>
 </dl>
 
 To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
