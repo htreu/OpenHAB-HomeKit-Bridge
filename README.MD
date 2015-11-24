@@ -21,6 +21,20 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 * Install the node module dependencies:
 
   `npm install`
+* If you have number items, make sure the unit type (F, C, %) is specified:
+  ```
+  Number
+    Humidity_House
+    "Humidity [%.1f %%]"
+
+  Number
+    HouseTemperatureInF
+    "Temperature [%.1f F]"
+
+  Number
+    HouseTemperatureInC
+    "Temperature [%.1f C]"
+  ```
 * Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
   sitemap demo label="HomeKit" {
@@ -38,7 +52,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 
     # Temperature sensor
     Text item=Temperature_GF_Living
-}
+  }
   ```
 
 ##### Run OpenHAB HomeKit Bridge
@@ -72,6 +86,44 @@ To execute unit tests run
 To produce test coverage output run
 
 `npm run-script coverage`
+
+##### Additional Advanced Usage
+###### Creating a thermostat composed of multiple OpenHab Items
+This is only tested with OpenHab 2...
+* Create an items file with a group for all the thermostat items which has a tag "thermostat". Make sure all appropriate items are a member of the group. Add the "setPoint" tag to any items that can be set:
+  ```
+  Group
+    gHouseThermostat
+    "House Thermostat"
+    ["thermostat"]
+
+  Number
+  	iTemperature_House
+  	"Temperature [%.1f °F]"
+  	<temperature>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+
+  Number
+  	iHumidity_House
+  	"Humidity [%.1f %%]"
+  	<humidity>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+
+  Number
+  	iTempSet_House
+  	"Set Temp [%d °F]"
+  	<temperature>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+  ```
+* Add the gtoup to the homekit.sitemap file:
+  ```
+  sitemap demo label="HomeKit" {
+    group item=gHouseThermostat
+  }
+  ```
 
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
