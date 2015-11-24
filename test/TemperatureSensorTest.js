@@ -9,7 +9,7 @@ import { TemperatureSensor } from '..';
 process.env.NODE_ENV = 'test';
 
 function createTemperatureSensor() {
-  return new TemperatureSensor('temperatureSensorName', 'http://openhab.test/rest/temperatureSensor', '23.5');
+  return new TemperatureSensor('temperatureSensorName', 'temperatureSensorItemName', 'http://openhab.test/rest/temperatureSensor', '23.5', '1');
 }
 
 describe('TemperatureSensor', function () {

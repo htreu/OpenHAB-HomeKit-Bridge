@@ -9,7 +9,7 @@ import { SwitchItem } from '..';
 process.env.NODE_ENV = 'test';
 
 function createSwitchItem() {
-  return new SwitchItem('switchItemName', 'http://openhab.test/rest/switchItem', 'ON');
+  return new SwitchItem('switchName', 'switchItemName', 'http://openhab.test/rest/switchItem', 'ON', '1');
 }
 
 describe('SwitchItem', function () {
@@ -25,9 +25,9 @@ describe('SwitchItem', function () {
     let switchItem = createSwitchItem();
     let accessory = switchItem.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('switchItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('switchName');
     accessory.getService(Service.Lightbulb)
-      .getCharacteristic(Characteristic.Name).value.should.equal('switchItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('switchName');
   });
 
   it('should have set the initial value', function () {

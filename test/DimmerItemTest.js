@@ -9,7 +9,7 @@ import { DimmerItem } from '..';
 process.env.NODE_ENV = 'test';
 
 function createDimmerItem() {
-  return new DimmerItem('dimmerItemName', 'http://openhab.test/rest/dimmerItem', '80');
+  return new DimmerItem('dimmerName', 'dimmerItemName', 'http://openhab.test/rest/dimmerItem', '80', '1');
 }
 
 describe('DimmerItem', function () {
@@ -25,9 +25,9 @@ describe('DimmerItem', function () {
     let dimmerItem = createDimmerItem();
     let accessory = dimmerItem.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('dimmerItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('dimmerName');
     accessory.getService(Service.Lightbulb)
-      .getCharacteristic(Characteristic.Name).value.should.equal('dimmerItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('dimmerName');
   });
 
   it('should have set the initial value', function () {
