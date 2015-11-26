@@ -90,7 +90,10 @@ To produce test coverage output run
 ##### Additional Advanced Usage
 ###### Creating a thermostat composed of multiple OpenHab Items
 This is only tested with OpenHab 2...
-* Create an items file with a group for all the thermostat items which has a tag "thermostat". Make sure all appropriate items are a member of the group. Add the "setPoint" tag to any items that can be set:
+* The following must be present in an items file:
+    * Group for all the thermostat items which has a tag "thermostat"
+    * All appropriate items must be a member of the group
+    * items that are setpoints must have "set" (not case sensitive) in their names
   ```
   Group
     gHouseThermostat
@@ -118,7 +121,7 @@ This is only tested with OpenHab 2...
   	(gHouseThermostat)
   	{<binding information goes here>}
   ```
-* Add the gtoup to the homekit.sitemap file:
+* Add the group to the homekit.sitemap file:
   ```
   sitemap demo label="HomeKit" {
     group item=gHouseThermostat
