@@ -124,7 +124,7 @@ This is only tested with OpenHab 2...
 * Add the group to the homekit.sitemap file:
   ```
   sitemap demo label="HomeKit" {
-    group item=gHouseThermostat
+    Group item=gHouseThermostat
   }
   ```
 
