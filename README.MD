@@ -71,6 +71,9 @@ To produce test coverage output run
 
 `npm run-script coverage`
 
+##### Known issues
+* iOS HomeKit may not delete the bridge properly from its database. In this case The bridge can neither be connected nor added again. In this case delete the _persist_ folder and restart the bridge with a new name using the 'name' option.
+
 ##### Backlog/ToDo
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)

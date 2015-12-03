@@ -1,6 +1,6 @@
 {
   "name": "openHAB-HomeKit-Bridge",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
     "start": "node index.js start",
