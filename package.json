@@ -34,7 +34,7 @@
   "main": "openHABBridge.js",
   "license": "ISC",
   "devDependencies": {
-    "babel-istanbul": "^0.5.9",
+    "babel-istanbul": "^0.4.1",
     "coveralls": "^2.11.4",
     "mocha": "^2.3.3",
     "mocha-istanbul": "^0.2.0",
