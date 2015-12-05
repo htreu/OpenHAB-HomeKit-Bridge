@@ -44,11 +44,13 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 ##### Run OpenHAB HomeKit Bridge
 This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a sitemap named 'demo.sitemap':
 
-  `npm start -- --server 192.1.0.99:8080 --sitemap demo`
+  `npm start -- --name "myOpenHAB-Bridge" --server 192.1.0.99:8080 --sitemap demo`
 
 ###### Command line options:
 
 <dl>
+<dt>-n, --name</dt>
+  <dd>The name of the bridge as shown in the HomeKit database. _This option is mandatory._</dd>
 <dt>-s, --server</dt>
   <dd>The network address and port of the OpenHAB server as ip:port. Defaults to 127.0.0.1:8080</dd>
 <dt>-p, --pincode</dt>
@@ -72,8 +74,9 @@ To produce test coverage output run
 `npm run-script coverage`
 
 ##### Known issues
-* iOS HomeKit may not delete the bridge properly from its database. In this case The bridge can neither be connected nor added again. In this case delete the _persist_ folder and restart the bridge with a new name using the 'name' option.
+* iOS HomeKit may not delete the bridge properly from its database. In this case the bridge can neither be connected nor added again. Delete the _persist_ folder and restart the bridge with a new name using the 'name' option.
 
 ##### Backlog/ToDo
+* Distinguish between switches and lights when adding SwitchItems.
 * Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)
