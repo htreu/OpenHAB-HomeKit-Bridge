@@ -3,11 +3,13 @@
   "version": "1.2.0",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
+    "clean": "rm -rf lib-test lib-cov",
     "start": "node index.js start",
-    "test": "mocha --compilers js:babel-core/register --reporter spec",
+    "pretest": "babel --presets es2015,stage-2 -d lib-test lib",
+    "test": "export TEST=true && mocha --compilers js:babel-core/register --reporter spec",
     "precoverage": "mv .babelrc babelrc && rm -rf lib-cov && `npm bin`/babel-istanbul instrument --es-modules --output lib-cov lib && mv babelrc .babelrc",
     "coverage": "export COVER=true && export ISTANBUL_REPORTERS='text-summary' && mocha --compilers js:babel-core/register --reporter mocha-istanbul",
-    "precoveralls": "npm run-script precoverage && rm -rf lcov* && export COVER=true && export ISTANBUL_REPORTERS='lcov' && mocha --compilers js:babel-core/register --reporter mocha-istanbul",
+    "precoveralls": "npm run precoverage && rm -rf lcov* && export COVER=true && export ISTANBUL_REPORTERS='lcov' && mocha --compilers js:babel-core/register --reporter mocha-istanbul",
     "coveralls": "`npm bin`/coveralls < lcov.info"
   },
   "repository": {
@@ -19,9 +21,9 @@
   },
   "dependencies": {
     "babel": "^6.0.15",
+    "babel-cli": "^6.3.13",
     "babel-core": "^6.1.2",
     "babel-preset-es2015": "^6.1.2",
-    "babel-preset-react": "^6.1.2",
     "babel-preset-stage-2": "^6.1.2",
     "crypto": "0.0.3",
     "hap-nodejs": "0.0.6",
@@ -36,7 +38,7 @@
   "devDependencies": {
     "babel-istanbul": "^0.4.1",
     "coveralls": "^2.11.4",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
     "mocha-istanbul": "^0.2.0",
     "nock": "^2.13.0",
     "should": "^7.1.0"

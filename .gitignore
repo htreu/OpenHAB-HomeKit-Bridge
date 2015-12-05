@@ -3,4 +3,5 @@ persist
 npm-debug.log
 lcov-report
 lib-cov
+lib-test
 lcov.info
