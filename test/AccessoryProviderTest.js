@@ -1,22 +1,23 @@
 'use strict';
 
 import should from 'should';
-import { ItemProvider } from '..';
+import { AccessoryProvider } from '..';
 
 process.env.NODE_ENV = 'test';
 
-describe('ItemProvider', function () {
 
-  let itemProvider = new ItemProvider();
+describe('AccessoryProvider', function () {
+
+  let accessoryProvider = new AccessoryProvider();
 
   it('should process all known items', function(done) {
-    let homeKitAccessories = itemProvider.createHomeKitAccessories(openHabWidgets());
+    let homeKitAccessories = accessoryProvider.createHomeKitAccessories(openHabWidgets());
     homeKitAccessories.should.have.length(5);
     done();
   });
 
   it('should allow duplicate names for different types', function(done) {
-    let homeKitAccessories = itemProvider.createHomeKitAccessories(duplicateNamesWidgets());
+    let homeKitAccessories = accessoryProvider.createHomeKitAccessories(duplicateNamesWidgets());
 
     homeKitAccessories.forEach(function(original) {
       homeKitAccessories.forEach(function(accessory) {

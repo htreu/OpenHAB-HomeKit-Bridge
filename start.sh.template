@@ -1,4 +1,4 @@
 #!/bin/bash
 BASEDIR=$(dirname $0)
 cd $BASEDIR
-npm start -- --server localhost:8080 --sitemap homekit &> bridge.log
+npm start -- --name "myOpenHAB-Bridge" --server localhost:8080 --sitemap homekit &> bridge.log

@@ -7,4 +7,5 @@ coverage
 persist
 lcov-report
 lib-cov
+lib-test
 lcov.info
