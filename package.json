@@ -30,7 +30,8 @@
     "node-persist": "^0.0.6",
     "request": "^2.55.0",
     "stdio": "^0.2.7",
-    "ws": "^0.8.0"
+    "ws": "^0.8.0",
+    "eventsource": "^0.1.6"
   },
   "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",

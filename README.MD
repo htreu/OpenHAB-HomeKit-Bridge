@@ -21,6 +21,20 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 * Install the node module dependencies:
 
   `npm install`
+* If you have number items, make sure the unit type (F, C, %) is specified:
+  ```
+  Number
+    Humidity_House
+    "Humidity [%.1f %%]"
+
+  Number
+    HouseTemperatureInF
+    "Temperature [%.1f F]"
+
+  Number
+    HouseTemperatureInC
+    "Temperature [%.1f C]"
+  ```
 * Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
   sitemap demo label="HomeKit" {
@@ -38,7 +52,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 
     # Temperature sensor
     Text item=Temperature_GF_Living
-}
+  }
   ```
 
 ##### Run OpenHAB HomeKit Bridge
@@ -57,6 +71,8 @@ This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a
   <dd>The pincode used for the bridge accessory. Defaults to 031-45-154.</dd>
 <dt>-m, --sitemap</dt>
   <dd>The name of the sitemap to load all items from. Items must not be nested in frames or groups. Defaults to 'homekit'.</dd>
+ <dt>-v, --version</dt>
+    <dd>Version of OpenHab you are running. Valid values are 1 or 2. Defaults to 1.</dd>
 </dl>
 
 To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
@@ -72,6 +88,47 @@ To execute unit tests run
 To produce test coverage output run
 
 `npm run-script coverage`
+
+##### Additional Advanced Usage
+###### Creating a thermostat composed of multiple OpenHab Items
+This is only tested with OpenHab 2...
+* The following must be present in an items file:
+    * Group for all the thermostat items which has a tag "thermostat"
+    * All appropriate items must be a member of the group
+    * items that are setpoints must have "set" (not case sensitive) in their names
+  ```
+  Group
+    gHouseThermostat
+    "House Thermostat"
+    ["thermostat"]
+
+  Number
+  	iTemperature_House
+  	"Temperature [%.1f °F]"
+  	<temperature>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+
+  Number
+  	iHumidity_House
+  	"Humidity [%.1f %%]"
+  	<humidity>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+
+  Number
+  	iTempSet_House
+  	"Set Temp [%d °F]"
+  	<temperature>
+  	(gHouseThermostat)
+  	{<binding information goes here>}
+  ```
+* Add the group to the homekit.sitemap file:
+  ```
+  sitemap demo label="HomeKit" {
+    Group item=gHouseThermostat
+  }
+  ```
 
 ##### Known issues
 * iOS HomeKit may not delete the bridge properly from its database. In this case the bridge can neither be connected nor added again. Delete the _persist_ folder and restart the bridge with a new name using the 'name' option.

@@ -9,7 +9,7 @@ import { ColorItem } from '..';
 process.env.NODE_ENV = 'test';
 
 function createColorItem() {
-  return new ColorItem('colorItemName', 'http://openhab.test/rest/colorItem', '140,80,30');
+  return new ColorItem('colorName', 'colorItemName', 'http://openhab.test/rest/colorItem', '140,80,30', '1');
 }
 
 describe('ColorItem', function () {
@@ -25,9 +25,9 @@ describe('ColorItem', function () {
     let colorItem = createColorItem();
     let accessory = colorItem.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('colorItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('colorName');
     accessory.getService(Service.Lightbulb)
-      .getCharacteristic(Characteristic.Name).value.should.equal('colorItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('colorName');
   });
 
   it('should have set the initial value', function () {

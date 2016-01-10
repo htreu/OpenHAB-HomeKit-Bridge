@@ -9,7 +9,7 @@ import { ContactSensor } from '..';
 process.env.NODE_ENV = 'test';
 
 function createContactSensor() {
-  return new ContactSensor('contactSensorName', 'http://openhab.test/rest/contactSensor', 'OPEN');
+  return new ContactSensor('contactSensorName', 'contactSensorItemName', 'http://openhab.test/rest/contactSensor', 'OPEN', '1');
 }
 
 describe('ContactSensor', function () {
