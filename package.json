@@ -1,6 +1,6 @@
 {
   "name": "openHAB-HomeKit-Bridge",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Henning Treu <henning.treu@googlemail.com>",
   "scripts": {
     "clean": "rm -rf lib-test lib-cov",
@@ -27,7 +27,6 @@
     "babel-preset-stage-2": "^6.1.2",
     "crypto": "0.0.3",
     "hap-nodejs": "0.0.7",
-    "node-persist": "^0.0.6",
     "request": "^2.55.0",
     "stdio": "^0.2.7",
     "ws": "^0.8.0"
