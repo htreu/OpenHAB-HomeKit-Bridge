@@ -1,0 +1,135 @@
+{
+  "name": "openHAB-HomeKit-Bridge",
+  "version": "1.2.1",
+  "dependencies": {
+    "babel": {
+      "version": "6.3.26",
+      "from": "babel@>=6.0.15 <7.0.0"
+    },
+    "babel-cli": {
+      "version": "6.4.0",
+      "from": "babel-cli@>=6.3.13 <7.0.0"
+    },
+    "babel-core": {
+      "version": "6.4.0",
+      "from": "babel-core@>=6.1.2 <7.0.0"
+    },
+    "babel-preset-es2015": {
+      "version": "6.3.13",
+      "from": "babel-preset-es2015@>=6.1.2 <7.0.0"
+    },
+    "babel-preset-stage-2": {
+      "version": "6.3.13",
+      "from": "babel-preset-stage-2@>=6.1.2 <7.0.0"
+    },
+    "crypto": {
+      "version": "0.0.3",
+      "from": "crypto@0.0.3"
+    },
+    "hap-nodejs": {
+      "version": "0.0.7",
+      "from": "hap-nodejs@0.0.7",
+      "resolved": "https://registry.npmjs.org/hap-nodejs/-/hap-nodejs-0.0.7.tgz",
+      "dependencies": {
+        "curve25519": {
+          "version": "1.1.0",
+          "from": "git://github.com/KhaosT/node-curve25519.git",
+          "resolved": "git://github.com/KhaosT/node-curve25519.git#922eae612bb379fa84e8deb29f80c53d57c8be7b",
+          "dependencies": {
+            "nan": {
+              "version": "2.2.0",
+              "from": "nan@>=2.0.9 <3.0.0",
+              "resolved": "https://registry.npmjs.org/nan/-/nan-2.2.0.tgz"
+            },
+            "bindings": {
+              "version": "1.2.1",
+              "from": "bindings@>=1.2.1 <1.3.0",
+              "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
+            }
+          }
+        },
+        "debug": {
+          "version": "2.2.0",
+          "from": "debug@>=2.2.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz",
+          "dependencies": {
+            "ms": {
+              "version": "0.7.1",
+              "from": "ms@0.7.1",
+              "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz"
+            }
+          }
+        },
+        "ed25519": {
+          "version": "0.0.3",
+          "from": "git://github.com/KhaosT/ed25519.git",
+          "resolved": "git://github.com/KhaosT/ed25519.git#6356bc9e6e4643d56020293c14920ac12bcaa1ac",
+          "dependencies": {
+            "bindings": {
+              "version": "1.2.1",
+              "from": "bindings@>=1.2.1 <1.3.0",
+              "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
+            },
+            "nan": {
+              "version": "2.2.0",
+              "from": "nan@>=2.0.9 <3.0.0",
+              "resolved": "https://registry.npmjs.org/nan/-/nan-2.2.0.tgz"
+            }
+          }
+        },
+        "mdns": {
+          "version": "2.2.11",
+          "from": "mdns@>=2.2.4 <3.0.0",
+          "resolved": "https://registry.npmjs.org/mdns/-/mdns-2.2.11.tgz",
+          "dependencies": {
+            "bindings": {
+              "version": "1.2.1",
+              "from": "bindings@>=1.2.1 <1.3.0",
+              "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
+            },
+            "nan": {
+              "version": "2.1.0",
+              "from": "nan@>=2.1.0 <2.2.0",
+              "resolved": "https://registry.npmjs.org/nan/-/nan-2.1.0.tgz"
+            }
+          }
+        },
+        "node-persist": {
+          "version": "0.0.8",
+          "from": "node-persist@>=0.0.6 <0.0.7"
+        },
+        "srp": {
+          "version": "0.2.0",
+          "from": "git://github.com/KhaosT/node-srp.git",
+          "resolved": "git://github.com/KhaosT/node-srp.git#7feff53254897a0b1b9f0667ad17a8beb78acbb9",
+          "dependencies": {
+            "bignum": {
+              "version": "0.11.0",
+              "from": "bignum@0.11.0",
+              "resolved": "https://registry.npmjs.org/bignum/-/bignum-0.11.0.tgz",
+              "dependencies": {
+                "nan": {
+                  "version": "2.2.0",
+                  "from": "nan@>=2.0.0 <3.0.0",
+                  "resolved": "https://registry.npmjs.org/nan/-/nan-2.2.0.tgz"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "request": {
+      "version": "2.67.0",
+      "from": "request@>=2.55.0 <3.0.0"
+    },
+    "stdio": {
+      "version": "0.2.7",
+      "from": "stdio@>=0.2.7 <0.3.0"
+    },
+    "ws": {
+      "version": "0.8.1",
+      "from": "ws@>=0.8.0 <0.9.0"
+    }
+  }
+}
