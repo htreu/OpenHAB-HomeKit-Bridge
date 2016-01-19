@@ -77,4 +77,25 @@ describe('DimmerItem', function () {
     done();
   });
 
+  it('should read the openHAB values when homekit asks for updates', function(done) {
+    let dimmerItem = new DimmerItem('dimmerItemName', undefined, '80');
+    dimmerItem.url = 'http://openhab.test/rest/dimmerItem';
+
+    nock('http://openhab.test')
+      .get('/rest/dimmerItem/state?type=json')
+      .times(2)
+      .reply(200, '12');
+
+    dimmerItem.readOpenHabPowerState(function(err, value) {
+      err.should.be.false;
+      value.should.be.true;
+    });
+
+    dimmerItem.readOpenHabBrightnessState(function(err, value) {
+      err.should.be.false;
+      value.should.equal(12);
+      done();
+    });
+  });
+
 });
