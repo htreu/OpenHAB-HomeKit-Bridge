@@ -54,4 +54,22 @@ describe('TemperatureSensor', function () {
     createTemperatureSensor();
   });
 
+  it('should read the openHAB values when homekit asks for updates', function(done) {
+    let temperatureSensor = new TemperatureSensor('temperatureSensorName', undefined, '23.5');
+    temperatureSensor.url = 'http://openhab.test/rest/temperatureSensor';
+
+    nock('http://openhab.test')
+      .get('/rest/temperatureSensor/state?type=json')
+      .times(1)
+      .reply(200, '32.123');
+
+    temperatureSensor.readOpenHabTemperature(function(err, value) {
+      err.should.be.false;
+      value.should.be.equal(32.123);
+      done();
+    });
+
+  });
+
+
 });
