@@ -109,17 +109,17 @@ describe('ColorItem', function () {
 
     colorItem.readOpenHabBrightnessState(function(err, value) {
       err.should.be.false;
-      value[0].should.be.equal('3');
+      value.should.be.equal('3');
     });
 
     colorItem.readOpenHabHueState(function(err, value) {
       err.should.be.false;
-      value[0].should.be.equal('12');
+      value.should.be.equal('12');
     });
 
     colorItem.readOpenHabSaturationState(function(err, value) {
       err.should.be.false;
-      value[0].should.be.equal('8');
+      value.should.be.equal('8');
       done();
     });
   });
