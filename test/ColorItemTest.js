@@ -93,4 +93,35 @@ describe('ColorItem', function () {
     done();
   });
 
+  it('should read the openHAB values when homekit asks for updates', function(done) {
+    let colorItem = new ColorItem('colorItemName', undefined, '140,80,30');
+    colorItem.url = 'http://openhab.test/rest/colorItem';
+
+    nock('http://openhab.test')
+      .get('/rest/colorItem/state')
+      .times(4)
+      .reply(200, '12,8,3');
+
+    colorItem.readOpenHabPowerState(function(err, value) {
+      err.should.be.false;
+      value.should.be.true;
+    });
+
+    colorItem.readOpenHabBrightnessState(function(err, value) {
+      err.should.be.false;
+      value[0].should.be.equal('3');
+    });
+
+    colorItem.readOpenHabHueState(function(err, value) {
+      err.should.be.false;
+      value[0].should.be.equal('12');
+    });
+
+    colorItem.readOpenHabSaturationState(function(err, value) {
+      err.should.be.false;
+      value[0].should.be.equal('8');
+      done();
+    });
+  });
+
 });
