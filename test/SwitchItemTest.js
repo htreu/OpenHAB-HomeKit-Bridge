@@ -62,4 +62,19 @@ describe('SwitchItem', function () {
     done();
   });
 
+  it('should read the openHAB value when homekit asks for updates', function(done) {
+    let switchItem = new SwitchItem('switchItemName', undefined, 'ON');
+    switchItem.url = 'http://openhab.test/rest/switchItem';
+
+    nock('http://openhab.test')
+      .get('/rest/switchItem/state?type=json')
+      .reply(200, 'ON');
+
+    switchItem.readOpenHabPowerState(function(err, value) {
+      err.should.be.false;
+      value.should.be.true;
+      done();
+    });
+  });
+
 });
