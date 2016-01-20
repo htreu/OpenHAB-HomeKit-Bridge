@@ -45,6 +45,21 @@ describe('ContactSensor', function () {
     createContactSensor();
   });
 
+  it('should update characteristics value when listener triggers', function () {
+    let contactSensor = createContactSensor();
+    contactSensor.listener.callback('CLOSED');
+
+    contactSensor.accessory.getService(Service.ContactSensor)
+      .getCharacteristic(Characteristic.ContactSensorState).value.should
+        .equal(Characteristic.ContactSensorState.CONTACT_DETECTED);
+
+    contactSensor.listener.callback('OPEN');
+
+    contactSensor.accessory.getService(Service.ContactSensor)
+      .getCharacteristic(Characteristic.ContactSensorState).value.should
+        .equal(Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
+  });
+
   it('should read the openHAB value when homekit asks for updates', function(done) {
     let contactSensor = new ContactSensor('contactSensorName', undefined, 'OPEN');
     contactSensor.url = 'http://openhab.test/rest/contactSensor';
