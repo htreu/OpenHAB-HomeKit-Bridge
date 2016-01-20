@@ -45,4 +45,19 @@ describe('ContactSensor', function () {
     createContactSensor();
   });
 
+  it('should read the openHAB value when homekit asks for updates', function(done) {
+    let contactSensor = new ContactSensor('contactSensorName', undefined, 'OPEN');
+    contactSensor.url = 'http://openhab.test/rest/contactSensor';
+
+    nock('http://openhab.test')
+      .get('/rest/contactSensor/state?type=json')
+      .reply(200, 'Undefined');
+
+    contactSensor.readOpenHabContact(function(err, value) {
+      err.should.be.false;
+      value.should.be.equal(Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
+      done();
+    });
+  });
+
 });
