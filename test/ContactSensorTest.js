@@ -56,6 +56,15 @@ describe('ContactSensor', function () {
     contactSensor.readOpenHabContact(function(err, value) {
       err.should.be.false;
       value.should.be.equal(Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
+    });
+
+    nock('http://openhab.test')
+      .get('/rest/contactSensor/state?type=json')
+      .reply(200, 'CLOSED');
+
+    contactSensor.readOpenHabContact(function(err, value) {
+      err.should.be.false;
+      value.should.be.equal(Characteristic.ContactSensorState.CONTACT_DETECTED);
       done();
     });
   });
