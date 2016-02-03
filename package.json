@@ -34,7 +34,10 @@
   },
   "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",
-  "license": "ISC",
+  "licenses": [{
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
   "devDependencies": {
     "babel-istanbul": "^0.4.1",
     "coveralls": "^2.11.4",
