@@ -34,13 +34,17 @@
   },
   "homepage": "https://github.com/htreu/OpenHAB-HomeKit-Bridge",
   "main": "openHABBridge.js",
-  "licenses": [{
-    "type": "Apache-2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0"
-  }],
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
   "devDependencies": {
+    "babel-eslint": "^4.1.8",
     "babel-istanbul": "^0.4.1",
     "coveralls": "^2.11.4",
+    "eslint": "^1.10.3",
     "mocha": "^2.3.4",
     "mocha-istanbul": "^0.2.0",
     "nock": "^2.13.0",
