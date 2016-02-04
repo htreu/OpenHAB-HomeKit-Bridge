@@ -77,6 +77,5 @@ To produce test coverage output run
 * iOS HomeKit may not delete the bridge properly from its database. In this case the bridge can neither be connected nor added again. Delete the _persist_ folder and restart the bridge with a new name using the 'name' option.
 
 ##### Backlog/ToDo
-* Distinguish between switches and lights when adding SwitchItems.
-* Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
+* Distinguish between switches and lights when adding SwitchItems -> see [Issue 29](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/29)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)
