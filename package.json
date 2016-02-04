@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rm -rf lib-test lib-cov",
     "start": "node index.js start",
-    "pretest": "babel --presets es2015,stage-2 -d lib-test lib",
+    "pretest": "`npm bin`/eslint lib/*js test/*js && babel --presets es2015,stage-2 -d lib-test lib",
     "test": "export TEST=true && mocha --compilers js:babel-core/register --reporter spec",
     "precoverage": "mv .babelrc babelrc && rm -rf lib-cov && `npm bin`/babel-istanbul instrument --es-modules --output lib-cov lib && mv babelrc .babelrc",
     "coverage": "export COVER=true && export ISTANBUL_REPORTERS='text-summary' && mocha --compilers js:babel-core/register --reporter mocha-istanbul",
