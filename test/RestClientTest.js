@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict'
-
 import should from 'should';
 import nock from 'nock';
 import { RestClient } from '..';
@@ -24,16 +22,16 @@ process.env.NODE_ENV = 'test';
 
 describe('RestClient', function () {
 
-  // it('should fetch sitemap', function (done) {
-  //   nock('http://openhab.test')
-  //     .get('/rest/sitemaps/test.sitemap?type=json')
-  //     .reply(200, '{}');
-  //
-  //   new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-  //     function callback(result) {
-  //       done();
-  //     });
-  // });
+  it('should fetch sitemap', function (done) {
+    nock('http://openhab.test')
+      .get('/rest/sitemaps/test.sitemap?type=json')
+      .reply(200, '{}');
+
+    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
+      function callback(result) {
+        done();
+      });
+  });
 
   it('should return proper object', function (done) {
     nock('http://openhab.test')

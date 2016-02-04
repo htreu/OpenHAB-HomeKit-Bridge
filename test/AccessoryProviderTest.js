@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import should from 'should';
 import { AccessoryProvider } from '..';
 

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';

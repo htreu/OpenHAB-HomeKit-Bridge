@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';
@@ -49,7 +47,8 @@ describe('ContactSensor', function () {
   it('should have set the initial value', function () {
     let contactSensor = createContactSensor();
     contactSensor.accessory.getService(Service.ContactSensor)
-      .getCharacteristic(Characteristic.ContactSensorState).value.should.equal(Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
+      .getCharacteristic(Characteristic.ContactSensorState).value.should
+        .equal(Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
   });
 
   it('should make web socket connection to OpenHAB', function (done) {
