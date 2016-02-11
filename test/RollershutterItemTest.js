@@ -91,4 +91,18 @@ describe('RollershutterItem', function () {
     });
   });
 
+  it('should send command to openHAB when homekit sends updates', function(done) {
+    let rollershutterItem = new RollershutterItem('rollershutterItemName', undefined, '60');
+    rollershutterItem.url = 'http://openhab.test/rest/rollershutterItem';
+
+    nock('http://openhab.test')
+      .post('/rest/rollershutterItem', '100')
+      .reply(200);
+
+    rollershutterItem.updateOpenHabItem(100, function() {
+      done();
+    });
+
+  });
+
 });
