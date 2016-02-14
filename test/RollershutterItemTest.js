@@ -47,7 +47,7 @@ describe('RollershutterItem', function () {
   it('should have set the initial value', function () {
     let rollershutterItem = createRollershutterItem();
     rollershutterItem.accessory.getService(Service.WindowCovering)
-      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(80);
+      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(20);
   });
 
   it('should make web socket connection to OpenHAB', function (done) {
@@ -65,13 +65,13 @@ describe('RollershutterItem', function () {
     rollershutterItem.updatingFromOpenHAB = true;
     rollershutterItem.listener.callback('100');
     rollershutterItem.accessory.getService(Service.WindowCovering)
-      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(100);
+      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(0);
     rollershutterItem.updatingFromOpenHAB.should.be.false;
 
     rollershutterItem.updatingFromOpenHAB = true;
     rollershutterItem.listener.callback('10');
     rollershutterItem.accessory.getService(Service.WindowCovering)
-      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(10);
+      .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(90);
     rollershutterItem.updatingFromOpenHAB.should.be.false;
     done();
   });
@@ -96,10 +96,10 @@ describe('RollershutterItem', function () {
     rollershutterItem.url = 'http://openhab.test/rest/rollershutterItem';
 
     nock('http://openhab.test')
-      .post('/rest/rollershutterItem', '100')
+      .post('/rest/rollershutterItem', '30')
       .reply(200);
 
-    rollershutterItem.updateOpenHabItem(100, function() {
+    rollershutterItem.updateOpenHabItem(70, function() {
       done();
     });
 
