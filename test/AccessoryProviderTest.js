@@ -26,7 +26,7 @@ describe('AccessoryProvider', function () {
 
   it('should process all known items', function(done) {
     let homeKitAccessories = accessoryProvider.createHomeKitAccessories(openHabWidgets());
-    homeKitAccessories.should.have.length(5);
+    homeKitAccessories.should.have.length(4);
     done();
   });
 
@@ -49,11 +49,10 @@ describe('AccessoryProvider', function () {
 
 function openHabWidgets() {
   return [
-    { type:'SwitchItem', name:'switch', link:'http://openhab.test', state:'ON' },
-    { type:'DimmerItem', name:'dimmer', link:'http://openhab.test', state:'50' },
-    { type:'ColorItem', name:'color', link:'http://openhab.test', state:'10,100,100' },
-    { type:'RollershutterItem', name:'rollershutter', link:'http://openhab.test', state:'80' },
-    { type:'NumberItem', name:'temperature', link:'http://openhab.test', state:'22.5' },
+    { type:'Switch', name:'switch', link:'http://openhab.test', state:'ON' },
+    { type:'Slider', name:'slider', link:'http://openhab.test', state:'50' },
+    { type:'Colorpicker', name:'color', link:'http://openhab.test', state:'10,100,100' },
+    { type:'Text', name:'text', link:'http://openhab.test', state:'22.5' },
 
     // Unknown
     { type:'ContactSensor', name:'contact', link:'http://openhab.test', state:'OPEN' }
@@ -62,10 +61,9 @@ function openHabWidgets() {
 
 function duplicateNamesWidgets() {
   return [
-    { type:'SwitchItem',        name:'itemName', link:'http://openhab.test', state:'ON' },
-    { type:'DimmerItem',        name:'itemName', link:'http://openhab.test', state:'50' },
-    { type:'ColorItem',         name:'itemName', link:'http://openhab.test', state:'10,100,100' },
-    { type:'RollershutterItem', name:'itemName', link:'http://openhab.test', state:'80' },
-    { type:'NumberItem',        name:'itemName', link:'http://openhab.test', state:'22.5' }
+    { type:'Switch',      name:'itemName', link:'http://openhab.test', state:'ON' },
+    { type:'Slider',      name:'itemName', link:'http://openhab.test', state:'50' },
+    { type:'Colorpicker', name:'itemName', link:'http://openhab.test', state:'10,100,100' },
+    { type:'Text',        name:'itemName', link:'http://openhab.test', state:'22.5' }
   ];
 };

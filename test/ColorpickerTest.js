@@ -18,120 +18,120 @@ import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';
 
-import { ColorItem } from '..';
+import { Colorpicker } from '..';
 
 process.env.NODE_ENV = 'test';
 
-function createColorItem() {
-  return new ColorItem('colorItemName', 'http://openhab.test/rest/colorItem', '140,80,30');
+function createColorpicker() {
+  return new Colorpicker('colorpickerName', 'http://openhab.test/rest/colorpicker', '140,80,30');
 }
 
-describe('ColorItem', function () {
+describe('Colorpicker', function () {
 
   it('should contain AccessoryInformation & Lightbulb services', function () {
-    let colorItem = createColorItem();
-    colorItem.should.have.property('accessory');
-    colorItem.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
-    colorItem.accessory.getService(Service.Lightbulb).should.not.be.empty;
+    let colorpicker = createColorpicker();
+    colorpicker.should.have.property('accessory');
+    colorpicker.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
+    colorpicker.accessory.getService(Service.Lightbulb).should.not.be.empty;
   });
 
   it('should have set the correct name', function () {
-    let colorItem = createColorItem();
-    let accessory = colorItem.accessory;
+    let colorpicker = createColorpicker();
+    let accessory = colorpicker.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('colorItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('colorpickerName');
     accessory.getService(Service.Lightbulb)
-      .getCharacteristic(Characteristic.Name).value.should.equal('colorItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('colorpickerName');
   });
 
   it('should have set the initial value', function () {
-    let colorItem = createColorItem();
-    colorItem.accessory.getService(Service.Lightbulb)
+    let colorpicker = createColorpicker();
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.On).value.should.be.true;
 
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Hue).value.should.be.equal(140);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Saturation).value.should.be.equal(80);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Brightness).value.should.be.equal(30);
   });
 
   it('should make web socket connection to OpenHAB', function (done) {
     nock('http://openhab.test')
-      .get('/rest/colorItem/state?type=json')
+      .get('/rest/colorpicker/state?type=json')
       .reply(200, function(uri, requestBody) {
         done();
       });
-    createColorItem();
+    createColorpicker();
   });
 
   it('should update characteristics value when listener triggers', function (done) {
-    let colorItem = createColorItem();
+    let colorpicker = createColorpicker();
 
-    colorItem.updatingFromOpenHAB = true;
-    colorItem.listener.callback('90,100,0');
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.updatingFromOpenHAB = true;
+    colorpicker.listener.callback('90,100,0');
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.On).value.should.be.false;
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Brightness).value.should.be.equal(0);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Hue).value.should.be.equal(90);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Saturation).value.should.be.equal(100);
-    colorItem.updatingFromOpenHAB.should.be.false;
+    colorpicker.updatingFromOpenHAB.should.be.false;
 
-    colorItem.updatingFromOpenHAB = true;
-    colorItem.listener.callback('0,100,50');
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.updatingFromOpenHAB = true;
+    colorpicker.listener.callback('0,100,50');
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.On).value.should.be.true;
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Brightness).value.should.be.equal(50);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Hue).value.should.be.equal(0);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Saturation).value.should.be.equal(100);
-    colorItem.updatingFromOpenHAB.should.be.false;
+    colorpicker.updatingFromOpenHAB.should.be.false;
 
-    colorItem.updatingFromOpenHAB = true;
-    colorItem.listener.callback('90,0,100');
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.updatingFromOpenHAB = true;
+    colorpicker.listener.callback('90,0,100');
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.On).value.should.be.true;
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Brightness).value.should.be.equal(100);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Hue).value.should.be.equal(90);
-    colorItem.accessory.getService(Service.Lightbulb)
+    colorpicker.accessory.getService(Service.Lightbulb)
       .getCharacteristic(Characteristic.Saturation).value.should.be.equal(0);
-    colorItem.updatingFromOpenHAB.should.be.false;
+    colorpicker.updatingFromOpenHAB.should.be.false;
     done();
   });
 
   it('should read the openHAB values when homekit asks for updates', function(done) {
-    let colorItem = new ColorItem('colorItemName', undefined, '140,80,30');
-    colorItem.url = 'http://openhab.test/rest/colorItem';
+    let colorpicker = new Colorpicker('colorpickerName', undefined, '140,80,30');
+    colorpicker.url = 'http://openhab.test/rest/colorpicker';
 
     nock('http://openhab.test')
-      .get('/rest/colorItem/state')
+      .get('/rest/colorpicker/state')
       .times(4)
       .reply(200, '12,8,3');
 
-    colorItem.readOpenHabPowerState(function(err, value) {
+    colorpicker.readOpenHabPowerState(function(err, value) {
       err.should.be.false;
       value.should.be.true;
     });
 
-    colorItem.readOpenHabBrightnessState(function(err, value) {
+    colorpicker.readOpenHabBrightnessState(function(err, value) {
       err.should.be.false;
       value.should.be.equal('3');
     });
 
-    colorItem.readOpenHabHueState(function(err, value) {
+    colorpicker.readOpenHabHueState(function(err, value) {
       err.should.be.false;
       value.should.be.equal('12');
     });
 
-    colorItem.readOpenHabSaturationState(function(err, value) {
+    colorpicker.readOpenHabSaturationState(function(err, value) {
       err.should.be.false;
       value.should.be.equal('8');
       done();
