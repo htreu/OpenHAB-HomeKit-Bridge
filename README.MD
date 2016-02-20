@@ -17,7 +17,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
 ##### Install the OpenHAB HomeKit Bridge:
 * On non OS X systems install the avahi library:
 
-  `sudo apt-get install libavahi-compat-libdnssd-dev`
+  `sudo apt-get install avahi-daemon libavahi-compat-libdnssd-dev`
 * Install the node module dependencies:
 
   `npm install`
