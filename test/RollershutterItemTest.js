@@ -18,73 +18,77 @@ import should from 'should';
 import nock from 'nock';
 import { Service, Characteristic } from 'hap-nodejs';
 
-import { RollershutterItem } from '..';
+import { Switch } from '..';
 
 process.env.NODE_ENV = 'test';
 
-function createRollershutterItem() {
-  return new RollershutterItem('rollershutterItemName', 'http://openhab.test/rest/rollershutterItem', '80');
+function createRollershutterSwitch() {
+  return new Switch(
+    'rollershutterSwitchName',
+    'http://openhab.test/rest/rollershutterSwitch',
+    '80',
+    'RollershutterItem');
 }
 
 describe('RollershutterItem', function () {
 
   it('should contain AccessoryInformation & Lightbulb services', function () {
-    let rollershutterItem = createRollershutterItem();
-    rollershutterItem.should.have.property('accessory');
-    rollershutterItem.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
-    rollershutterItem.accessory.getService(Service.WindowCovering).should.not.be.empty;
+    let rollershutterSwitch = createRollershutterSwitch();
+    rollershutterSwitch.should.have.property('accessory');
+    rollershutterSwitch.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
+    rollershutterSwitch.accessory.getService(Service.WindowCovering).should.not.be.empty;
   });
 
   it('should have set the correct name', function () {
-    let rollershutterItem = createRollershutterItem();
-    let accessory = rollershutterItem.accessory;
+    let rollershutterSwitch = createRollershutterSwitch();
+    let accessory = rollershutterSwitch.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('rollershutterItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('rollershutterSwitchName');
     accessory.getService(Service.WindowCovering)
-      .getCharacteristic(Characteristic.Name).value.should.equal('rollershutterItemName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('rollershutterSwitchName');
   });
 
   it('should have set the initial value', function () {
-    let rollershutterItem = createRollershutterItem();
-    rollershutterItem.accessory.getService(Service.WindowCovering)
+    let rollershutterSwitch = createRollershutterSwitch();
+    rollershutterSwitch.accessory.getService(Service.WindowCovering)
       .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(20);
   });
 
   it('should make web socket connection to OpenHAB', function (done) {
     nock('http://openhab.test')
-      .get('/rest/rollershutterItem/state?type=json')
+      .get('/rest/rollershutterSwitch/state?type=json')
       .reply(200, function(uri, requestBody) {
         done();
       });
-    createRollershutterItem();
+    createRollershutterSwitch();
   });
 
   it('should update characteristics value when listener triggers', function (done) {
-    let rollershutterItem = createRollershutterItem();
+    let rollershutterSwitch = createRollershutterSwitch();
 
-    rollershutterItem.updatingFromOpenHAB = true;
-    rollershutterItem.listener.callback('100');
-    rollershutterItem.accessory.getService(Service.WindowCovering)
+    rollershutterSwitch.item.updatingFromOpenHAB = true;
+    rollershutterSwitch.item.listener.callback('100');
+    rollershutterSwitch.accessory.getService(Service.WindowCovering)
       .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(0);
-    rollershutterItem.updatingFromOpenHAB.should.be.false;
+    rollershutterSwitch.item.updatingFromOpenHAB.should.be.false;
 
-    rollershutterItem.updatingFromOpenHAB = true;
-    rollershutterItem.listener.callback('10');
-    rollershutterItem.accessory.getService(Service.WindowCovering)
+    rollershutterSwitch.item.updatingFromOpenHAB = true;
+    rollershutterSwitch.item.listener.callback('10');
+    rollershutterSwitch.accessory.getService(Service.WindowCovering)
       .getCharacteristic(Characteristic.CurrentPosition).value.should.equal(90);
-    rollershutterItem.updatingFromOpenHAB.should.be.false;
+    rollershutterSwitch.item.updatingFromOpenHAB.should.be.false;
     done();
   });
 
   it('should read the openHAB value when homekit asks for updates', function(done) {
-    let rollershutterItem = new RollershutterItem('rollershutterItemName', undefined, '60');
-    rollershutterItem.url = 'http://openhab.test/rest/rollershutterItem';
+    let rollershutterSwitch = new Switch('rollershutterSwitchName', undefined, '60', 'RollershutterItem');
+    rollershutterSwitch.item.url = 'http://openhab.test/rest/rollershutterSwitch';
 
     nock('http://openhab.test')
-      .get('/rest/rollershutterItem/state?type=json')
+      .get('/rest/rollershutterSwitch/state?type=json')
       .reply(200, '50');
 
-    rollershutterItem.readOpenHabCurrentPosition(function(err, value) {
+    rollershutterSwitch.item.readOpenHabCurrentPosition(function(err, value) {
       err.should.be.false;
       value.should.equal(50);
       done();
@@ -92,14 +96,14 @@ describe('RollershutterItem', function () {
   });
 
   it('should send command to openHAB when homekit sends updates', function(done) {
-    let rollershutterItem = new RollershutterItem('rollershutterItemName', undefined, '60');
-    rollershutterItem.url = 'http://openhab.test/rest/rollershutterItem';
+    let rollershutterSwitch = new Switch('rollershutterSwitchName', undefined, '60', 'RollershutterItem');
+    rollershutterSwitch.item.url = 'http://openhab.test/rest/rollershutterSwitch';
 
     nock('http://openhab.test')
-      .post('/rest/rollershutterItem', '30')
+      .post('/rest/rollershutterSwitch', '30')
       .reply(200);
 
-    rollershutterItem.updateOpenHabItem(70, function() {
+    rollershutterSwitch.item.updateOpenHabItem(70, function() {
       done();
     });
 
