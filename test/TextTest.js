@@ -36,9 +36,9 @@ function createContactSensorText() {
 }
 
 describe('Text', function () {
-  
+
   describe('with generic string value', function () {
-    
+
     it('should contain AccessoryInformation & TextInfo services', function () {
       let textElement = createGenericText();
       textElement.should.have.property('accessory');
@@ -70,7 +70,7 @@ describe('Text', function () {
           link: 'http://openhab.test/rest/textName'
         }
       });
-      
+
       nock('http://openhab.test')
         .get('/rest/sitemaps/test.sitemap?type=json')
         .reply(200, '{ "homepage" : { "widget" : [ ' + widgetJSON + ' ] } }');
@@ -82,7 +82,7 @@ describe('Text', function () {
       });
 
     });
-    
+
     it('should read the openHAB values when homekit asks for updates', function(done) {
       let textElement = new Text('Text Value [Generic Text]', 'http://openhab.test/rest/textName', 'Generic');
 
@@ -93,7 +93,7 @@ describe('Text', function () {
           link: 'http://openhab.test/rest/textName'
         }
       });
-      
+
       nock('http://openhab.test')
         .get('/rest/sitemaps/test.sitemap?type=json')
         .reply(200, '{ "homepage" : { "widget" : [ ' + widgetJSON + ' ] } }');
@@ -105,12 +105,12 @@ describe('Text', function () {
       });
 
     });
-    
+
   });
-  
-  
+
+
   describe('with temperature', function () {
-    
+
     it('should contain AccessoryInformation & TemperatureSensor services', function () {
       let textElement = createTemperatureText();
       textElement.should.have.property('accessory');
@@ -167,9 +167,9 @@ describe('Text', function () {
       });
 
     });
-    
+
   });
-  
+
 
   describe('with contact sensor', function () {
 
@@ -245,7 +245,7 @@ describe('Text', function () {
     });
 
   });
-  
+
 
 
 });
