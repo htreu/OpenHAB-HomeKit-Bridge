@@ -20,7 +20,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
   `sudo apt-get install avahi-daemon libavahi-compat-libdnssd-dev`
 * Install the node module dependencies:
 
-  `npm install`
+  `npm update`
 * Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
   sitemap demo label="HomeKit" {
@@ -36,8 +36,8 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
     # Rollershutter/Blinds
     Switch item=Shutter_GF_Living
 
-    # Temperature sensor
-    Text item=Temperature_GF_Living
+    # Temperature sensor, value is taken from label
+    Text item=Temperature_GF_Living label="Livingroom [%.1f °C]"
 }
   ```
 
