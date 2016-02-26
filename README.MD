@@ -5,7 +5,7 @@ OpenHAB HomeKit Bridge
 =============
 OpenHAB HomeKit Bridge bridges openHAB items to Apple´s HomeKit Accessory Protocol. It is based on [hap-nodejs](https://github.com/KhaosT/HAP-NodeJS).
 
-Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
+Watch the [demo video here](https://youtu.be/QAbOHhjo05U) and [Siri controlling roller shutters here](https://youtu.be/z9G06-dxblo).
 
 ##### Prerequisites
 * [openHAB](http://www.openhab.org) server running with at least one Switch item configured
