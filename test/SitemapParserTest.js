@@ -33,9 +33,9 @@ describe('SitemapParser', function () {
   // load demo sitemap
   let sitemap = require('./resources/sitemap.json');
 
-  it('should return 6 items for demo sitemap', function (done) {
+  it('should return 7 items for demo sitemap', function (done) {
     let items = sitemapParser.parseSitemap(sitemap, '');
-    items.should.have.length(6);
+    items.should.have.length(7);
     done();
   });
 
@@ -58,6 +58,9 @@ describe('SitemapParser', function () {
         case 'Toggle Switch':
           items[i].state.should.equal('ON');
           break;
+        case 'Outlet':
+          items[i].state.should.equal('ON');
+          break;
         case 'Dimmed Light':
           items[i].state.should.equal('80');
           break;
@@ -65,24 +68,6 @@ describe('SitemapParser', function () {
           items[i].state.should.equal('144.32432432432432,41.340782122905026,70.19607843137254');
           break;
       }
-    }
-    done();
-  });
-
-  it('should return switch items when filtered', function (done) {
-    let items = sitemapParser.parseSitemap(sitemap, elementType.SWITCH_ELEMENT);
-    items.should.have.length(3);
-    for (let i = 0; i < items.length; i++) {
-      items[i]['type'].should.equal('Switch');
-    }
-    done();
-  });
-
-  it('should return dimmer items when filtered', function (done) {
-    let items = sitemapParser.parseSitemap(sitemap, elementType.SLIDER_ELEMENT);
-    items.should.have.length(1);
-    for (let i = 0; i < items.length; i++) {
-      items[i]['type'].should.equal('Slider');
     }
     done();
   });

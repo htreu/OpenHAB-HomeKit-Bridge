@@ -81,6 +81,24 @@
           "state": "Uninitialized",
           "link": "http://localhost:8080/rest/items/Temperature_GF_Living"
         }
+      },
+      {
+        "widgetId": "demo_6",
+        "type": "Frame",
+        "label": "outlet",
+        "icon": "outlet",
+        "widget": {
+          "widgetId": "demo_6_0",
+          "type": "Switch",
+          "label": "Outlet",
+          "icon": "switch",
+          "item": {
+            "type": "SwitchItem",
+            "name": "Outlet",
+            "state": "ON",
+            "link": "http://localhost:8080/rest/items/Outlet"
+          }
+        }
       }
     ]
   }
