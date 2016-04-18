@@ -22,62 +22,90 @@ process.env.NODE_ENV = 'test';
 
 describe('RestClient', function () {
 
-  it('should fetch sitemap', function (done) {
-    nock('http://openhab.test')
-      .get('/rest/sitemaps/test.sitemap?type=json')
-      .reply(200, '{}');
+  describe('for fetching sitemap', function () {
 
-    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-      function callback(error, result) {
-        done();
-      });
+    it('should fetch sitemap', function (done) {
+      nock('http://openhab.test')
+        .get('/rest/sitemaps/test.sitemap?type=json')
+        .reply(200, '{}');
+
+      new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
+        function callback(error, result) {
+          done();
+        });
+    });
+
+    it('should return proper object', function (done) {
+      nock('http://openhab.test')
+        .get('/rest/sitemaps/test.sitemap?type=json')
+        .reply(200, '{ "homepage" : { "widget" : [] } }');
+
+      new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
+        function callback(error, result) {
+          result.should.have.property('homepage');
+          result.homepage.should.have.property('widget');
+          result.homepage.widget.should.be.instanceof(Array);
+          done();
+        });
+    });
+
+    it('should pass error on response error code', function (done) {
+      nock('http://openhab.test')
+        .get('/rest/sitemaps/test.sitemap?type=json')
+        .reply(500, '{}');
+
+      new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
+        function callback(error, result) {
+          error.should.be.Error;
+          done();
+        }
+      );
+    });
+
+    it('should pass error on connection error', function (done) {
+      new RestClient().fetchSitemap('foo.bar', 'test.sitemap',
+        function callback(error, result) {
+          error.should.be.Error;
+          done();
+        }
+      );
+    });
   });
 
-  it('should return proper object', function (done) {
-    nock('http://openhab.test')
-      .get('/rest/sitemaps/test.sitemap?type=json')
-      .reply(200, '{ "homepage" : { "widget" : [] } }');
+  describe('for fetching sitemap', function () {
 
-    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-      function callback(error, result) {
-        result.should.have.property('homepage');
-        result.homepage.should.have.property('widget');
-        result.homepage.widget.should.be.instanceof(Array);
-        done();
-      });
-  });
+    it('should fetch item', function (done) {
+      nock('http://openhab.test')
+        .get('/rest/demoItem?type=json')
+        .reply(200, '{}');
 
-  it('should fetch item', function (done) {
-    nock('http://openhab.test')
-      .get('/rest/demoItem?type=json')
-      .reply(200, '{}');
+      new RestClient().fetchItem('http://openhab.test/rest/demoItem',
+        function callback(error, result) {
+          done();
+        });
+    });
 
-    new RestClient().fetchItem('http://openhab.test/rest/demoItem',
-      function callback(result) {
-        done();
-      });
-  });
+    it('should pass error on response error code', function (done) {
+      nock('http://openhab.test')
+        .get('/rest/demoItem?type=json')
+        .reply(500, '{}');
 
-  it('should pass error on response error code', function (done) {
-    nock('http://openhab.test')
-      .get('/rest/sitemaps/test.sitemap?type=json')
-      .reply(500, '{}');
+      new RestClient().fetchItem('http://openhab.test/rest/demoItem',
+        function callback(error, result) {
+          error.should.be.Error;
+          done();
+        }
+      );
+    });
 
-    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-      function callback(error, result) {
-        error.should.be.Error;
-        done();
-      }
-    );
-  });
-
-  it('should pass error on connection error', function (done) {
-    new RestClient().fetchSitemap('foo.bar', 'test.sitemap',
-      function callback(error, result) {
-        error.should.be.Error;
-        done();
-      }
-    );
+    it('should pass error on connection error', function (done) {
+      new RestClient().fetchItem('http://openhab.test/rest/fooBar',
+        function callback(error, result) {
+          error.should.be.Error;
+          done();
+        }
+      );
+    });
   });
 
 });
