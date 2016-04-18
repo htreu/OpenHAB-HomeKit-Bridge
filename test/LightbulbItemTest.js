@@ -91,4 +91,18 @@ describe('LightbulbItem', function () {
     });
   });
 
+  it('should update the openHAB value when homekit has new value', function(done) {
+    let lightbulbElement = new Switch('lightbulbName', undefined, 'OFF');
+    lightbulbElement.item.url = 'http://openhab.test/rest/lightbulb';
+
+    nock('http://openhab.test')
+      .post('/rest/lightbulb', 'ON')
+      .reply(200, '');
+
+    lightbulbElement.item.updateOpenHabItem(true, function() {
+      done();
+    });
+  });
+
+
 });

@@ -77,7 +77,7 @@ describe('OutletItem', function () {
   });
 
   it('should read the openHAB value when homekit asks for updates', function(done) {
-    let outletElement = new Switch('outletName', undefined, 'ON');
+    let outletElement = new Switch('outletName', undefined, 'ON', 'OutletItem');
     outletElement.item.url = 'http://openhab.test/rest/outlet';
 
     nock('http://openhab.test')
@@ -87,6 +87,19 @@ describe('OutletItem', function () {
     outletElement.item.readOpenHabPowerState(function(err, value) {
       err.should.be.false;
       value.should.be.true;
+      done();
+    });
+  });
+
+  it('should update the openHAB value when homekit has new value', function(done) {
+    let outletElement = new Switch('outletName', undefined, 'ON', 'OutletItem');
+    outletElement.item.url = 'http://openhab.test/rest/outlet';
+
+    nock('http://openhab.test')
+      .post('/rest/outlet', 'OFF')
+      .reply(200, '');
+
+    outletElement.item.updateOpenHabItem(false, function() {
       done();
     });
   });
