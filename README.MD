@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge.svg?branch=master)](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge)
 [![Coverage Status](https://coveralls.io/repos/htreu/OpenHAB-HomeKit-Bridge/badge.svg?branch=master&service=github)](https://coveralls.io/github/htreu/OpenHAB-HomeKit-Bridge?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/b7123ae9da0b466fb69ee89679bbc284)](https://www.codacy.com/app/henning-treu/OpenHAB-HomeKit-Bridge)
 
 OpenHAB HomeKit Bridge
 =============
