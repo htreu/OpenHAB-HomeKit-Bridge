@@ -28,7 +28,7 @@ describe('RestClient', function () {
       .reply(200, '{}');
 
     new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-      function callback(result) {
+      function callback(error, result) {
         done();
       });
   });
@@ -39,7 +39,7 @@ describe('RestClient', function () {
       .reply(200, '{ "homepage" : { "widget" : [] } }');
 
     new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
-      function callback(result) {
+      function callback(error, result) {
         result.should.have.property('homepage');
         result.homepage.should.have.property('widget');
         result.homepage.widget.should.be.instanceof(Array);
@@ -47,12 +47,37 @@ describe('RestClient', function () {
       });
   });
 
-  // it('should throw exception on connection error', function (done) {
-  //   let restClient = new RestClient();
-  //   (function() {
-  //     restClient.fetchSitemap(undefined, 'test.sitemap', null);
-  //   }).should.throw();
-  //   done();
-  // });
+  it('should fetch item', function (done) {
+    nock('http://openhab.test')
+      .get('/rest/demoItem?type=json')
+      .reply(200, '{}');
+
+    new RestClient().fetchItem('http://openhab.test/rest/demoItem',
+      function callback(result) {
+        done();
+      });
+  });
+
+  it('should pass error on response error code', function (done) {
+    nock('http://openhab.test')
+      .get('/rest/sitemaps/test.sitemap?type=json')
+      .reply(500, '{}');
+
+    new RestClient().fetchSitemap('openhab.test', 'test.sitemap',
+      function callback(error, result) {
+        error.should.be.Error;
+        done();
+      }
+    );
+  });
+
+  it('should pass error on connection error', function (done) {
+    new RestClient().fetchSitemap('foo.bar', 'test.sitemap',
+      function callback(error, result) {
+        error.should.be.Error;
+        done();
+      }
+    );
+  });
 
 });

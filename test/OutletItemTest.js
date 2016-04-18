@@ -22,69 +22,69 @@ import { Switch } from '..';
 
 process.env.NODE_ENV = 'test';
 
-function createSwitch() {
-  return new Switch('switchName', 'http://openhab.test/rest/switch', 'ON');
+function createOutlet() {
+  return new Switch('outletName', 'http://openhab.test/rest/outlet', 'ON', 'OutletItem');
 }
 
-describe('SwitchItem', function () {
+describe('OutletItem', function () {
 
-  it('should contain AccessoryInformation & Lightbulb services', function () {
-    let switchElement = createSwitch();
-    switchElement.should.have.property('accessory');
-    switchElement.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
-    switchElement.accessory.getService(Service.Lightbulb).should.not.be.empty;
+  it('should contain AccessoryInformation & Outlet services', function () {
+    let outletElement = createOutlet();
+    outletElement.should.have.property('accessory');
+    outletElement.accessory.getService(Service.AccessoryInformation).should.not.be.empty;
+    outletElement.accessory.getService(Service.Outlet).should.not.be.empty;
   });
 
   it('should have set the correct name', function () {
-    let switchElement = createSwitch();
-    let accessory = switchElement.accessory;
+    let outletElement = createOutlet();
+    let accessory = outletElement.accessory;
     accessory.getService(Service.AccessoryInformation)
-      .getCharacteristic(Characteristic.Name).value.should.equal('switchName');
-    accessory.getService(Service.Lightbulb)
-      .getCharacteristic(Characteristic.Name).value.should.equal('switchName');
+      .getCharacteristic(Characteristic.Name).value.should.equal('outletName');
+    accessory.getService(Service.Outlet)
+      .getCharacteristic(Characteristic.Name).value.should.equal('outletName');
   });
 
   it('should have set the initial value', function () {
-    let switchElement = createSwitch();
-    switchElement.accessory.getService(Service.Lightbulb)
+    let outletElement = createOutlet();
+    outletElement.accessory.getService(Service.Outlet)
       .getCharacteristic(Characteristic.On).value.should.be.true;
   });
 
   it('should make web socket connection to OpenHAB', function (done) {
     nock('http://openhab.test')
-      .get('/rest/switch/state?type=json')
+      .get('/rest/outlet/state?type=json')
       .reply(200, function(uri, requestBody) {
         done();
       });
-    createSwitch();
+    createOutlet();
   });
 
   it('should update characteristics value when listener triggers', function (done) {
-    let switchElement = createSwitch();
+    let outletElement = createOutlet();
 
-    switchElement.item.updatingFromOpenHAB = true;
-    switchElement.item.listener.callback('ON');
-    switchElement.accessory.getService(Service.Lightbulb)
+    outletElement.item.updatingFromOpenHAB = true;
+    outletElement.item.listener.callback('ON');
+    outletElement.accessory.getService(Service.Outlet)
       .getCharacteristic(Characteristic.On).value.should.be.true;
-    switchElement.item.updatingFromOpenHAB.should.be.false;
+    outletElement.item.updatingFromOpenHAB.should.be.false;
 
-    switchElement.item.updatingFromOpenHAB = true;
-    switchElement.item.listener.callback('OFF');
-    switchElement.accessory.getService(Service.Lightbulb)
+    outletElement.item.updatingFromOpenHAB = true;
+    outletElement.item.listener.callback('OFF');
+    outletElement.accessory.getService(Service.Outlet)
       .getCharacteristic(Characteristic.On).value.should.be.false;
-    switchElement.item.updatingFromOpenHAB.should.be.false;
+    outletElement.item.updatingFromOpenHAB.should.be.false;
     done();
   });
 
   it('should read the openHAB value when homekit asks for updates', function(done) {
-    let switchElement = new Switch('switchName', undefined, 'ON');
-    switchElement.item.url = 'http://openhab.test/rest/switch';
+    let outletElement = new Switch('outletName', undefined, 'ON');
+    outletElement.item.url = 'http://openhab.test/rest/outlet';
 
     nock('http://openhab.test')
-      .get('/rest/switch/state?type=json')
+      .get('/rest/outlet/state?type=json')
       .reply(200, 'ON');
 
-    switchElement.item.readOpenHabPowerState(function(err, value) {
+    outletElement.item.readOpenHabPowerState(function(err, value) {
       err.should.be.false;
       value.should.be.true;
       done();
