@@ -54,7 +54,7 @@ Switch | Switch | Lightbulb | On/Off
 Dimmer | Slider | Lightbulb | On/Off, Brightness
 Color | Colorpicker | Lightbulb | On/Off, Brightness, Hue, Saturation
 Rollershutter | Switch | Rollershutter | Opening state 0% - 100%
-Number | Text | Temperature | temp in °
+Number | Text | Temperature | temp in °C
 Switch | Frame* + Switch | Outlet | On/Off
 
 \* The Frame must be tagged with `label=outlet` and/or `icon=outlet` to let the bridge pick up its Switch items as outlets.
