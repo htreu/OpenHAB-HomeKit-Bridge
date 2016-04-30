@@ -25,7 +25,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U) and [Siri controlling 
 * Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
   sitemap demo label="HomeKit" {
-    # On/Off Item (lights, outlets)
+    # Lightbulb (On/Off), SwitchItem is always a lightbulb. See Frames for outlets.
     Switch item=DemoSwitch label="Toggle Switch"
 
     # Dimmer items (On/Off, Brightness)
@@ -39,8 +39,25 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U) and [Siri controlling 
 
     # Temperature sensor, value is taken from label
     Text item=Temperature_GF_Living label="Livingroom [%.1f °C]"
+
+    Frame label="outlet" icon="outlet" { # Outlets must be configured in a Frame.
+      Switch item=Outlet label="Outlet"
+    }
 }
   ```
+
+The following mapping of openHAB items and HomeKit items apply:
+
+openHAB item | sitemap item | HomeKit item | Functions
+-------------|--------------|--------------|----------
+Switch | Switch | Lightbulb | On/Off
+Dimmer | Slider | Lightbulb | On/Off, Brightness
+Color | Colorpicker | Lightbulb | On/Off, Brightness, Hue, Saturation
+Rollershutter | Switch | Rollershutter | Opening state 0% - 100%
+Number | Text | Temperature | temp in °
+Switch | Frame* + Switch | Outlet | On/Off
+
+\* The Frame must be tagged with `label=outlet` and/or `icon=outlet` to let the bridge pick up its Switch items as outlets.
 
 ##### Run OpenHAB HomeKit Bridge
 This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a sitemap named 'demo.sitemap':
