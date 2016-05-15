@@ -41,7 +41,7 @@ Watch the [demo video here](https://youtu.be/QAbOHhjo05U) and [Siri controlling 
     Text item=Temperature_GF_Living label="Livingroom [%.1f °C]"
 
     Frame label="outlet" icon="outlet" { # Outlets must be configured in a Frame.
-      Switch item=Outlet label="Outlet"
+      Switch item=Outlet_GF_Living label="Radio"
     }
 }
   ```
