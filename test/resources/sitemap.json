@@ -1,10 +1,10 @@
 {
   "name": "demo",
-  "label": "Main Menu",
+  "label": "HomeKit",
   "link": "http://localhost:8080/rest/sitemaps/demo",
   "homepage": {
     "id": "demo",
-    "title": "Main Menu",
+    "title": "HomeKit",
     "link": "http://localhost:8080/rest/sitemaps/demo/demo",
     "leaf": "false",
     "widget": [
@@ -12,7 +12,7 @@
         "widgetId": "demo_0",
         "type": "Switch",
         "label": "Toggle Switch",
-        "icon": "switch-on",
+        "icon": "switch",
         "item": {
           "type": "SwitchItem",
           "name": "DemoSwitch",
@@ -22,27 +22,9 @@
       },
       {
         "widgetId": "demo_1",
-        "type": "Slider",
-        "label": "Volume",
-        "icon": "slider",
-        "switchSupport": "false",
-        "sendFrequency": "0",
-        "item": {
-          "type": "DimmerItem",
-          "name": "Volume",
-          "state": "80",
-          "link": "http://localhost:8080/rest/items/Volume"
-        }
-      },
-      {
-        "widgetId": "demo_2",
         "type": "Switch",
-        "label": "Button Switch",
-        "icon": "switch-on",
-        "mapping": {
-          "command": "ON",
-          "label": "On"
-        },
+        "label": "Demo Switch",
+        "icon": "switch",
         "item": {
           "type": "SwitchItem",
           "name": "DemoSwitch",
@@ -51,13 +33,71 @@
         }
       },
       {
+        "widgetId": "demo_2",
+        "type": "Slider",
+        "label": "Dimmed Light",
+        "icon": "slider",
+        "switchSupport": "true",
+        "sendFrequency": "0",
+        "item": {
+          "type": "DimmerItem",
+          "name": "DimmedLight",
+          "state": "80",
+          "link": "http://localhost:8080/rest/items/DimmedLight"
+        }
+      },
+      {
         "widgetId": "demo_3",
+        "type": "Colorpicker",
+        "label": "RGB Light",
+        "icon": "slider-70",
+        "item": {
+          "type": "ColorItem",
+          "name": "RGBLight",
+          "state": "144.32432432432432,41.340782122905026,70.19607843137254",
+          "link": "http://localhost:8080/rest/items/RGBLight"
+        }
+      },
+      {
+        "widgetId": "demo_4",
         "type": "Switch",
-        "label": "Button Switch",
-        "icon": "switch-on",
-        "mapping": {
-          "command": "ON",
-          "label": "On"
+        "label": "Livingroom",
+        "icon": "rollershutter-0",
+        "item": {
+          "type": "RollershutterItem",
+          "name": "Shutter_GF_Living",
+          "state": "0",
+          "link": "http://localhost:8080/rest/items/Shutter_GF_Living"
+        }
+      },
+      {
+        "widgetId": "demo_5",
+        "type": "Text",
+        "label": "Temperature [- Â°C]",
+        "icon": "temperature",
+        "item": {
+          "type": "NumberItem",
+          "name": "Temperature_GF_Living",
+          "state": "Uninitialized",
+          "link": "http://localhost:8080/rest/items/Temperature_GF_Living"
+        }
+      },
+      {
+        "widgetId": "demo_6",
+        "type": "Frame",
+        "label": "outlet",
+        "icon": "outlet",
+        "widget": {
+          "widgetId": "demo_6_0",
+          "type": "Switch",
+          "label": "Outlet",
+          "icon": "switch",
+          "item": {
+            "type": "SwitchItem",
+            "name": "Outlet",
+            "state": "ON",
+            "link": "http://localhost:8080/rest/items/Outlet"
+          }
         }
       }
     ]

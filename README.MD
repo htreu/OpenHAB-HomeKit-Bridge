@@ -1,50 +1,99 @@
 [![Build Status](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge.svg?branch=master)](https://travis-ci.org/htreu/OpenHAB-HomeKit-Bridge)
+[![Coverage Status](https://coveralls.io/repos/htreu/OpenHAB-HomeKit-Bridge/badge.svg?branch=master&service=github)](https://coveralls.io/github/htreu/OpenHAB-HomeKit-Bridge?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/b7123ae9da0b466fb69ee89679bbc284)](https://www.codacy.com/app/henning-treu/OpenHAB-HomeKit-Bridge)
 
 OpenHAB HomeKit Bridge
 =============
-OpenHAB HomeKit Bridge is a bridge implementation of the HomeKit Accessory Protocol.
-The implementation is based on a fork of the original [HAP-NodeJS](https://github.com/KhaosT/HAP-NodeJS) extended with npm package.json and a index.js for the object factories.
+OpenHAB HomeKit Bridge bridges openHAB items to Apple´s HomeKit Accessory Protocol. It is based on [hap-nodejs](https://github.com/KhaosT/HAP-NodeJS).
 
-Watch the [demo video here](https://youtu.be/QAbOHhjo05U).
+Watch the [demo video here](https://youtu.be/QAbOHhjo05U) and [Siri controlling roller shutters here](https://youtu.be/z9G06-dxblo).
 
 ##### Prerequisites
-* [OpenHAB](http://www.openhab.org) server running with at least one Switch item configured
-* node.js 0.12.x
-* iOS Developer account to run a HomeKit application at least in the iOS simulator
+* [openHAB](http://www.openhab.org) server running with at least one Switch item configured
+* node.js 0.12.x, 4.0.x or 4.1.x
+* an iOS device running iOS 8 or 9
+* an iOS app for modifying the HomeKit database (like [elgato eve](https://www.elgato.com/de/eve-app-homekit))
 * this repository
 
-##### Install OpenHAB HomeKit Bridge:
-On non OS X systems install the avahi library:
-  ```js
-  sudo apt-get install libavahi-compat-libdnssd-dev
+##### Install the OpenHAB HomeKit Bridge:
+* On non OS X systems install the avahi library:
+
+  `sudo apt-get install avahi-daemon libavahi-compat-libdnssd-dev`
+* Install the node module dependencies:
+
+  `npm update`
+* Create a custom sitemap which lists all items you want to control with HomeKit:
   ```
-Install the node module dependencies:
-  ```js
-  npm install
+  sitemap demo label="HomeKit" {
+    # Lightbulb (On/Off), SwitchItem is always a lightbulb. See Frames for outlets.
+    Switch item=DemoSwitch label="Toggle Switch"
+
+    # Dimmer items (On/Off, Brightness)
+    Slider item=DimmedLight label="Dimmed Light" switchSupport
+
+    # RGB light items (On/Off, Brightness, Hue, Saturation)
+    Colorpicker item=RGBLight icon="slider"
+
+    # Rollershutter/Blinds
+    Switch item=Shutter_GF_Living
+
+    # Temperature sensor, value is taken from label
+    Text item=Temperature_GF_Living label="Livingroom [%.1f °C]"
+
+    Frame label="outlet" icon="outlet" { # Outlets must be configured in a Frame.
+      Switch item=Outlet_GF_Living label="Radio"
+    }
+}
   ```
+
+The following mapping of openHAB items and HomeKit items apply:
+
+openHAB item | sitemap item | HomeKit item | Functions
+-------------|--------------|--------------|----------
+Switch | Switch | Lightbulb | On/Off
+Dimmer | Slider | Lightbulb | On/Off, Brightness
+Color | Colorpicker | Lightbulb | On/Off, Brightness, Hue, Saturation
+Rollershutter | Switch | Rollershutter | Opening state 0% - 100%
+Number | Text | Temperature | temp in °C
+Switch | Frame* + Switch | Outlet | On/Off
+
+\* The Frame must be tagged with `label=outlet` and/or `icon=outlet` to let the bridge pick up its Switch items as outlets.
 
 ##### Run OpenHAB HomeKit Bridge
 This connects to OpenHAB at 192.168.0.99 on port 8080 and loads all items from a sitemap named 'demo.sitemap':
-  ```js
-  npm start -- --server 192.1.0.99:8080 --sitemap demo
-  ```
 
-##### Command line options:
+  `npm start -- --name "myOpenHAB-Bridge" --server 192.1.0.99:8080 --sitemap demo`
+
+###### Command line options:
 
 <dl>
+<dt>-n, --name</dt>
+  <dd>The name of the bridge as shown in the HomeKit database. _This option is mandatory._ </dd>
 <dt>-s, --server</dt>
-  <dd>The network address and port of the OpenHAB server as ip:port. Defaults to 127.0.0.1:8080</dd>
+  <dd>The network address and port of the OpenHAB server as ```ip:port```. Defaults to 127.0.0.1:8080</dd>
 <dt>-p, --pincode</dt>
   <dd>The pincode used for the bridge accessory. Defaults to 031-45-154.</dd>
 <dt>-m, --sitemap</dt>
   <dd>The name of the sitemap to load all items from. Items must not be nested in frames or groups. Defaults to 'homekit'.</dd>
 </dl>
 
-At this point OpenHAB HomeKit Bridge will bridge [OpenHAB Switch items](https://github.com/openhab/openhab/wiki/Explanation-of-items) using the LightBulb Service so only On/Off is supported right now.
+To access the bridge from an iOS device (9.0+) use Apples [HomeKit Catalog 2.0](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html) demo application or a vendor app like elgato´s eve (see _Prerequisites_). Use the predefined pin code _031-45-154_ to add the bridge as an accessory.
 
-To access the bridge from an iDevice use Apples [HomeKit Catalog](https://developer.apple.com/library/ios/samplecode/HomeKitCatalog/Introduction/Intro.html#//apple_ref/doc/uid/TP40015048) demo application or KhaosT´s [HomeKit Demo](https://github.com/KhaosT/HomeKit-Demo). Use the predefined pin code 031-45-154 to add the bridge as an accessory.
+You may use the `start.sh.template` to create your own simple start up script. This gives you at least simple logging output and debugging possibilities in case the bridge runs in the background.
+
+##### Running Tests
+
+To execute unit tests run
+
+`npm test`
+
+To produce test coverage output run
+
+`npm run-script coverage`
+
+##### Known issues
+* iOS HomeKit may not delete the bridge properly from its database. In this case the bridge can neither be connected nor added again. Delete the _persist_ folder and restart the bridge with a new name using the 'name' option.
 
 ##### Backlog/ToDo
-* Add more robust websocket listener for state changes in OpenHAB -> see [Issue 5](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/5)
-* Implement Color item with LightBulb Service -> see [Issue 6](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/6)
+* Distinguish between switches and lights when adding SwitchItems -> see [Issue 29](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/29)
 * Implement Rollershutter -> see [Issue 7](https://github.com/htreu/OpenHAB-HomeKit-Bridge/issues/7)

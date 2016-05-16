@@ -1,0 +1,23 @@
+{
+  "name": "demo",
+  "label": "HomeKit",
+  "link": "http://localhost:8080/rest/sitemaps/demo",
+  "homepage": {
+    "id": "demo",
+    "title": "HomeKit",
+    "link": "http://localhost:8080/rest/sitemaps/demo/demo",
+    "leaf": "false",
+    "widget": {
+      "widgetId": "demo_0",
+      "type": "Switch",
+      "label": "Toggle Switch",
+      "icon": "switch",
+      "item": {
+        "type": "SwitchItem",
+        "name": "DemoSwitch",
+        "state": "Uninitialized",
+        "link": "http://localhost:8080/rest/items/DemoSwitch"
+      }
+    }
+  }
+}
